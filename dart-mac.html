@@ -95,10 +95,13 @@ input{
 .controls{display:flex;gap:10px;margin-top:10px}
 .controls button{background:#334155;color:#fff}
 
-.winner{
-  background:#16a34a!important;
+.winner-card{
+  background:#16a34a;
   color:#000;
+  text-align:center;
 }
+.winner-card h2{margin:10px 0}
+.winner-card .cup{font-size:64px}
 </style>
 </head>
 
@@ -106,7 +109,16 @@ input{
 <div class="app">
 <h1>KARAMBOL KRIKET</h1>
 
-<div id="step1" class="card">
+<!-- MODE -->
+<div id="modeStep" class="card">
+  <h3>Oyun Modu</h3>
+  <div class="btn-row">
+    <button onclick="setMode(1)">Best of 1</button>
+    <button onclick="setMode(3)">Best of 3</button>
+  </div>
+</div>
+
+<div id="step1" class="card" style="display:none">
   <h3>Takım Sayısı</h3>
   <div class="btn-row">
     <button onclick="selectTeams(2)">2</button>
@@ -128,12 +140,29 @@ input{
     <button onclick="resetBoard()">Reset</button>
   </div>
 </div>
+
+<div id="winner" class="card winner-card" style="display:none">
+  <div class="cup">🏆</div>
+  <h2 id="winnerName"></h2>
+  <button onclick="location.reload()">Yeni Oyun</button>
+</div>
+
 </div>
 
 <script>
 const numbers=["20","19","18","17","16","15","14","13","12","D","T","B","H"];
 const states=["","/","X","⭕"];
+
 let teamCount=0,teams=[],scores=[],history=[],points=[];
+let bestOf=1;
+
+const cap=s=>s.charAt(0).toUpperCase()+s.slice(1).toLowerCase();
+
+function setMode(m){
+  bestOf=m;
+  modeStep.style.display="none";
+  step1.style.display="block";
+}
 
 function selectTeams(n){
   teamCount=n;
@@ -145,9 +174,12 @@ function selectTeams(n){
 }
 
 function startGame(){
-  teams=[...inputs.querySelectorAll("input")].map(i=>i.value||"Takım");
+  teams=[...inputs.querySelectorAll("input")]
+    .map(i=>cap(i.value||"Takım"));
+
   scores=Array.from({length:teamCount},()=>Array(numbers.length).fill(0));
   points=Array(teamCount).fill(0);
+
   step2.style.display="none";
   game.style.display="block";
   render();
@@ -225,8 +257,13 @@ function checkWin(){
   scores.forEach((s,i)=>{
     if(s.every(v=>v===3)){
       points[i]++;
-      alert(teams[i]+" kazandı!");
       resetBoard(true);
+
+      if(bestOf===1 || points[i]===2){
+        game.style.display="none";
+        winner.style.display="block";
+        winnerName.textContent=teams[i];
+      }
     }
   });
 }
