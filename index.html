@@ -13,62 +13,84 @@
   --accent:#22c55e;
   --text:#e5e7eb;
   --muted:#9ca3af;
+  --border:#1f2937;
 }
 *{box-sizing:border-box;font-family:system-ui}
 body{
   margin:0;
-  background:linear-gradient(180deg,#020617,#0b1220);
+  background:radial-gradient(circle at top,#020617,#0b1220);
   color:var(--text);
 }
 .app{
-  max-width:1000px;
+  max-width:1100px;
   margin:auto;
-  padding:18px;
+  padding:20px;
 }
-h1,h2{
-  text-align:center;
-  margin:10px 0 20px;
-}
-p.desc{
-  text-align:center;
-  color:var(--muted);
-  margin-top:-12px;
-  margin-bottom:20px;
-}
+h1,h2{text-align:center;margin:10px 0 18px}
+.desc{text-align:center;color:var(--muted);margin-top:-10px;margin-bottom:24px}
 
 /* GRID */
 .grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:16px;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:18px;
 }
 
 /* CARD */
 .card{
-  background:var(--card);
-  border-radius:20px;
+  background:linear-gradient(180deg,#020617,#020a1f);
+  border:1px solid var(--border);
+  border-radius:22px;
   padding:22px;
-  cursor:pointer;
+  box-shadow:0 20px 40px rgba(0,0,0,.45);
   transition:.25s ease;
-  box-shadow:0 20px 40px rgba(0,0,0,.35);
 }
 .card:hover{
-  transform:translateY(-6px) scale(1.02);
-  box-shadow:0 30px 60px rgba(0,0,0,.5);
+  transform:translateY(-6px);
+  box-shadow:0 30px 60px rgba(0,0,0,.65);
 }
 .card h3{
   margin:0 0 6px;
   font-size:22px;
+  display:flex;
+  align-items:center;
+  gap:10px;
 }
-.card span{
-  font-size:14px;
-  color:var(--muted);
+.card span{font-size:14px;color:var(--muted)}
+.icon{font-size:26px}
+
+/* FEATURES */
+.features{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  margin-top:10px;
+}
+.feature{
+  font-size:12px;
+  padding:4px 10px;
+  border-radius:999px;
+  background:#111827;
+  border:1px solid var(--border);
+  color:#cbd5f5;
+}
+
+/* BADGE */
+.badge{
+  display:inline-block;
+  margin-top:10px;
+  padding:4px 10px;
+  font-size:12px;
+  font-weight:700;
+  border-radius:999px;
+  background:#334155;
+  color:#fff;
 }
 
 /* BUTTON */
 .btn{
   width:100%;
-  margin-top:14px;
+  margin-top:16px;
   padding:14px;
   font-size:16px;
   font-weight:700;
@@ -77,23 +99,18 @@ p.desc{
   background:var(--accent);
   color:#000;
 }
-.btn.gray{
-  background:#334155;
-  color:#fff;
-}
+.btn.gray{background:#334155;color:#fff}
 
 /* VIEW */
 .view{display:none;animation:fade .35s ease}
 .view.active{display:block}
-
 iframe{
   width:100%;
   height:88vh;
   border:none;
-  border-radius:18px;
-  margin-top:10px;
+  border-radius:20px;
+  margin-top:12px;
 }
-
 @keyframes fade{
   from{opacity:0;transform:translateY(10px)}
   to{opacity:1;transform:none}
@@ -104,69 +121,106 @@ iframe{
 <body>
 <div class="app">
 
-<!-- ANA MENÜ -->
+<!-- HOME -->
 <div id="home" class="view active">
   <h1>🎮 Bözer Gaming</h1>
   <p class="desc">Mini oyun platformu</p>
 
   <div class="grid">
-    <div class="card" onclick="openGame('somali.html')">
-      <h3>Somali</h3>
+
+    <!-- SOMALI -->
+    <div class="card" onclick="openGame('somali.html','Somali')">
+      <h3><span class="icon">🎴</span> Somali</h3>
       <span>Okey tabanlı bahis oyunu</span>
+      <div class="features">
+        <div class="feature">Tekli</div>
+        <div class="feature">Eşli</div>
+      </div>
       <button class="btn">Oyna</button>
     </div>
 
-    <div class="card" onclick="openGame('americano.html')">
-      <h3>Americano</h3>
+    <!-- AMERICANO -->
+    <div class="card" onclick="openGame('americano.html','Americano')">
+      <h3><span class="icon">🧮</span> Americano</h3>
       <span>Puan & strateji oyunu</span>
+      <div class="features">
+        <div class="feature">2–5 Oyuncu</div>
+      </div>
       <button class="btn">Oyna</button>
     </div>
 
+    <!-- DART -->
     <div class="card" onclick="openDart()">
-      <h3>Dart</h3>
-      <span>Tüm dart modları</span>
+      <h3><span class="icon">🎯</span> Dart</h3>
+      <span>Antrenman, turnuva, maç</span>
+      <div class="features">
+        <div class="feature">Bot</div>
+        <div class="feature">Turnuva</div>
+        <div class="feature">Maç</div>
+      </div>
       <button class="btn">Aç</button>
     </div>
 
-    <div class="card" onclick="openGame('batak.html')">
-      <h3>Batak</h3>
-      <span>Yakında</span>
-      <button class="btn gray">Hazırlanıyor</button>
+    <!-- BATAK -->
+    <div class="card">
+      <h3><span class="icon">♠️</span> Batak</h3>
+      <span>Yakında eklenecek</span>
+      <span class="badge">YAKINDA</span>
+      <button class="btn gray" disabled>Hazırlanıyor</button>
     </div>
+
   </div>
 </div>
 
-<!-- DART MENÜ -->
+<!-- DART MENU -->
 <div id="dart" class="view">
   <h2>🎯 Dart Modları</h2>
-  <p class="desc">Antrenman, turnuva ve maç</p>
+  <p class="desc">Tüm dart oyunları tek yerde</p>
 
   <div class="grid">
-    <div class="card" onclick="openGame('dart/dartbot-v1.html')">
-      <h3>Dartbot v1</h3>
-      <span>Bot ile antrenman</span>
+
+    <div class="card" onclick="openGame('dart/dartbot-v1.html','Dartbot v1')">
+      <h3><span class="icon">🤖</span> Dartbot v1</h3>
+      <span>Bota karşı Karambol Kriket</span>
+      <div class="features">
+        <div class="feature">Bot’a Karşı</div>
+        <div class="feature">Karambol Kriket</div>
+        <div class="feature">1-10 LvL Bot</div>
+      </div>
       <button class="btn">Başla</button>
     </div>
 
-    <div class="card" onclick="openGame('dart/dart-turnuva.html')">
-      <h3>Turnuva</h3>
+    <div class="card" onclick="openGame('dart/dart-turnuva.html','Dart Turnuva')">
+      <h3><span class="icon">🏆</span> Turnuva</h3>
       <span>Eleme sistemi</span>
+      <div class="features">
+        <div class="feature">Max 4 Takım</div>
+        <div class="feature">Max 8 Oyuncu</div>
+        <div class="feature">Kura Sistemi</div>
+        <div class="feature">Otomatik Eşleşme</div>
+      </div>
       <button class="btn">Başla</button>
     </div>
 
-    <div class="card" onclick="openGame('dart/dart-mac.html')">
-      <h3>Maç</h3>
+    <div class="card" onclick="openGame('dart/dart-mac.html','Dart Maç')">
+      <h3><span class="icon">⚔️</span> Dart Maç</h3>
       <span>Hızlı skor takibi</span>
+      <div class="features">
+    <div class="feature">Karambol Kriket</div>
+        <div class="feature">Max 4 Takım</div>
+        <div class="feature">Tek Maç</div>
+      </div>
       <button class="btn">Başla</button>
     </div>
+
   </div>
 
   <button class="btn gray" onclick="goHome()">⬅ Ana Menü</button>
 </div>
 
-<!-- OYUN -->
+<!-- GAME -->
 <div id="game" class="view">
-  <button class="btn gray" onclick="goBack()">⬅ Geri</button>
+  <button class="btn gray" onclick="goHome()">⬅ Ana Menü</button>
   <iframe id="frame"></iframe>
 </div>
 
@@ -174,30 +228,16 @@ iframe{
 
 <script>
 const views=document.querySelectorAll('.view');
-
 function show(id){
   views.forEach(v=>v.classList.remove('active'));
   document.getElementById(id).classList.add('active');
 }
-
-function openGame(src){
-  show('game');
+function openGame(src,name){
   frame.src=src;
+  show('game');
 }
-
-function openDart(){
-  show('dart');
-}
-
-function goHome(){
-  frame.src="";
-  show('home');
-}
-
-function goBack(){
-  frame.src="";
-  show('home');
-}
+function openDart(){show('dart')}
+function goHome(){frame.src="";show('home')}
 </script>
 
 </body>
