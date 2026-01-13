@@ -19,6 +19,21 @@ h1{text-align:center}
 button{width:100%;padding:14px;font-size:18px;border:none;border-radius:12px;background:var(--accent);color:#000;margin-top:10px;cursor:pointer}
 .btn-row{display:flex;gap:10px;flex-wrap:wrap}
 .btn-row button{flex:1}
+/* === iOS INPUT GERÇEKTEN BÜYÜK OLSUN === */
+input[type="text"],
+input[type="number"] {
+  font-size: 22px !important;
+  line-height: 1.4;
+}
+
+/* iPhone Safari özel fix */
+@supports (-webkit-touch-callout: none) {
+  input[type="text"],
+  input[type="number"] {
+    font-size: 22px !important;
+  }
+}
+
 input{width:100%;padding:14px;font-size:18px;border-radius:12px;border:none}
 label{display:flex;gap:8px;align-items:center;margin:6px 0}
 .hidden{display:none!important;pointer-events:none!important}
