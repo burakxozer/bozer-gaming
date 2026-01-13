@@ -6,50 +6,98 @@
 <title>Bözer Gaming</title>
 
 <style>
+:root{
+  --bg:#0b1220;
+  --panel:#111827;
+  --card:#020617;
+  --accent:#22c55e;
+  --text:#e5e7eb;
+  --muted:#9ca3af;
+}
 *{box-sizing:border-box;font-family:system-ui}
 body{
   margin:0;
-  background:#0b1220;
-  color:#e5e7eb;
+  background:linear-gradient(180deg,#020617,#0b1220);
+  color:var(--text);
 }
 .app{
-  max-width:900px;
+  max-width:1000px;
   margin:auto;
-  padding:16px;
+  padding:18px;
 }
-h1{
+h1,h2{
   text-align:center;
+  margin:10px 0 20px;
+}
+p.desc{
+  text-align:center;
+  color:var(--muted);
+  margin-top:-12px;
   margin-bottom:20px;
 }
-.game-list{
+
+/* GRID */
+.grid{
   display:grid;
-  gap:14px;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:16px;
 }
-.game-btn{
-  padding:18px;
-  font-size:20px;
+
+/* CARD */
+.card{
+  background:var(--card);
+  border-radius:20px;
+  padding:22px;
+  cursor:pointer;
+  transition:.25s ease;
+  box-shadow:0 20px 40px rgba(0,0,0,.35);
+}
+.card:hover{
+  transform:translateY(-6px) scale(1.02);
+  box-shadow:0 30px 60px rgba(0,0,0,.5);
+}
+.card h3{
+  margin:0 0 6px;
+  font-size:22px;
+}
+.card span{
+  font-size:14px;
+  color:var(--muted);
+}
+
+/* BUTTON */
+.btn{
+  width:100%;
+  margin-top:14px;
+  padding:14px;
+  font-size:16px;
   font-weight:700;
   border:none;
-  border-radius:16px;
-  background:#22c55e;
+  border-radius:14px;
+  background:var(--accent);
   color:#000;
-  cursor:pointer;
 }
-.game-btn:hover{
-  opacity:.9;
-}
-.back{
+.btn.gray{
   background:#334155;
   color:#fff;
-  margin-bottom:10px;
 }
+
+/* VIEW */
+.view{display:none;animation:fade .35s ease}
+.view.active{display:block}
+
 iframe{
   width:100%;
-  height:90vh;
+  height:88vh;
   border:none;
-  border-radius:16px;
+  border-radius:18px;
+  margin-top:10px;
 }
-.hidden{display:none}
+
+@keyframes fade{
+  from{opacity:0;transform:translateY(10px)}
+  to{opacity:1;transform:none}
+}
 </style>
 </head>
 
@@ -57,36 +105,98 @@ iframe{
 <div class="app">
 
 <!-- ANA MENÜ -->
-<div id="menu">
+<div id="home" class="view active">
   <h1>🎮 Bözer Gaming</h1>
-  <div class="game-list">
-    <button class="game-btn" onclick="openGame('dartbot-v1.html')">Dartbot v1</button>
-    <button class="game-btn" onclick="openGame('somali.html')">Somali</button>
-    <button class="game-btn" onclick="openGame('americano.html')">Americano</button>
-    <button class="game-btn" onclick="openGame('dart-turnuva.html')">Dart Turnuva</button>
-    <button class="game-btn" onclick="openGame('dart-mac.html')">Dart Maç</button>
+  <p class="desc">Mini oyun platformu</p>
+
+  <div class="grid">
+    <div class="card" onclick="openGame('somali.html')">
+      <h3>Somali</h3>
+      <span>Okey tabanlı bahis oyunu</span>
+      <button class="btn">Oyna</button>
+    </div>
+
+    <div class="card" onclick="openGame('americano.html')">
+      <h3>Americano</h3>
+      <span>Puan & strateji oyunu</span>
+      <button class="btn">Oyna</button>
+    </div>
+
+    <div class="card" onclick="openDart()">
+      <h3>Dart</h3>
+      <span>Tüm dart modları</span>
+      <button class="btn">Aç</button>
+    </div>
+
+    <div class="card" onclick="openGame('batak.html')">
+      <h3>Batak</h3>
+      <span>Yakında</span>
+      <button class="btn gray">Hazırlanıyor</button>
+    </div>
   </div>
 </div>
 
-<!-- OYUN ALANI -->
-<div id="gameArea" class="hidden">
-  <button class="game-btn back" onclick="goBack()">⬅ Menüye Dön</button>
-  <iframe id="gameFrame"></iframe>
+<!-- DART MENÜ -->
+<div id="dart" class="view">
+  <h2>🎯 Dart Modları</h2>
+  <p class="desc">Antrenman, turnuva ve maç</p>
+
+  <div class="grid">
+    <div class="card" onclick="openGame('dart/dartbot-v1.html')">
+      <h3>Dartbot v1</h3>
+      <span>Bot ile antrenman</span>
+      <button class="btn">Başla</button>
+    </div>
+
+    <div class="card" onclick="openGame('dart/dart-turnuva.html')">
+      <h3>Turnuva</h3>
+      <span>Eleme sistemi</span>
+      <button class="btn">Başla</button>
+    </div>
+
+    <div class="card" onclick="openGame('dart/dart-mac.html')">
+      <h3>Maç</h3>
+      <span>Hızlı skor takibi</span>
+      <button class="btn">Başla</button>
+    </div>
+  </div>
+
+  <button class="btn gray" onclick="goHome()">⬅ Ana Menü</button>
+</div>
+
+<!-- OYUN -->
+<div id="game" class="view">
+  <button class="btn gray" onclick="goBack()">⬅ Geri</button>
+  <iframe id="frame"></iframe>
 </div>
 
 </div>
 
 <script>
-function openGame(file){
-  document.getElementById("menu").classList.add("hidden");
-  document.getElementById("gameArea").classList.remove("hidden");
-  document.getElementById("gameFrame").src = file;
+const views=document.querySelectorAll('.view');
+
+function show(id){
+  views.forEach(v=>v.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+function openGame(src){
+  show('game');
+  frame.src=src;
+}
+
+function openDart(){
+  show('dart');
+}
+
+function goHome(){
+  frame.src="";
+  show('home');
 }
 
 function goBack(){
-  document.getElementById("gameFrame").src = "";
-  document.getElementById("gameArea").classList.add("hidden");
-  document.getElementById("menu").classList.remove("hidden");
+  frame.src="";
+  show('home');
 }
 </script>
 
