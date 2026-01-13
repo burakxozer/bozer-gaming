@@ -9,49 +9,66 @@
 :root{
   --bg:#f4f6f8;
   --card:#ffffff;
-  --line:#d6dae1;
+  --line:#cfd4dc;
+  --text:#111;
   --blue:#2563eb;
   --red:#dc2626;
   --green:#16a34a;
   --ara:#fff1d6;
 }
 
+body.dark{
+  --bg:#0f172a;
+  --card:#1e293b;
+  --line:#334155;
+  --text:#e5e7eb;
+  --ara:#3b2f1c;
+}
+
 body{
   margin:0;
   font-family:Segoe UI,Arial,sans-serif;
   background:var(--bg);
+  color:var(--text);
+  transition:.2s;
 }
 
 h1{
   text-align:center;
-  margin:18px 0 8px;
-  letter-spacing:4px;
-  font-weight:600;
+  margin:10px 0 6px;
+  letter-spacing:3px;
+  font-size:24px;
 }
 
-.screen{
-  max-width:1100px;
-  margin:auto;
-  padding:12px;
+.themeBtn{
+  position:fixed;
+  top:8px;
+  right:10px;
+  background:transparent;
+  border:1px solid var(--line);
+  color:var(--text);
+  border-radius:8px;
+  padding:6px 10px;
+  font-size:12px;
 }
 
+.screen{padding:8px}
 .card{
   background:var(--card);
-  border-radius:14px;
-  padding:16px;
-  box-shadow:0 8px 22px rgba(0,0,0,.08);
+  border-radius:12px;
+  padding:10px;
+  box-shadow:0 6px 16px rgba(0,0,0,.08);
 }
-
 .center{text-align:center}
 
 button{
-  padding:10px 18px;
+  padding:8px 14px;
   border:none;
-  border-radius:10px;
+  border-radius:8px;
   background:var(--blue);
   color:white;
-  font-size:15px;
-  margin:6px;
+  font-size:14px;
+  margin:4px;
 }
 
 button.gray{background:#6b7280}
@@ -59,49 +76,49 @@ button.green{background:var(--green)}
 
 input{
   width:100%;
-  padding:10px;
-  font-size:15px;
-  border-radius:8px;
+  padding:8px;
+  font-size:14px;
+  border-radius:6px;
   border:1px solid var(--line);
+  background:transparent;
+  color:var(--text);
 }
 
-.tableWrap{overflow-x:auto}
-
 table{
-  border-collapse:collapse;
   width:100%;
-  min-width:600px;
-  margin-top:10px;
-  font-size:14px;
+  table-layout:fixed;
+  border-collapse:collapse;
+  margin-top:6px;
+  font-size:13px;
 }
 
 th,td{
   border:1px solid var(--line);
-  padding:6px;
+  padding:4px;
   text-align:center;
 }
 
 th.rule{
   text-align:left;
-  padding-left:10px;
+  padding-left:6px;
   white-space:nowrap;
 }
 
-.rule-black{color:#111}
+.cell{
+  border:none;
+  outline:none;
+  background:none;
+  color:var(--text);
+  width:100%;
+  text-align:center;
+}
+
+.rule-black{color:var(--text)}
 .rule-blue{color:var(--blue);font-weight:600}
 .rule-red{color:var(--red);font-weight:600}
 .rule-green{color:var(--green);font-weight:600}
 
-.arrow{color:var(--red);margin-right:6px}
-
-.cell{
-  width:100%;
-  border:none;
-  outline:none;
-  background:none;
-  text-align:center;
-}
-
+.arrow{color:var(--red);margin-right:4px}
 .ara{background:var(--ara);font-weight:600}
 
 .popup{
@@ -115,24 +132,40 @@ th.rule{
 }
 
 .popupBox{
-  background:white;
-  padding:22px;
-  border-radius:14px;
+  background:var(--card);
+  color:var(--text);
+  padding:18px;
+  border-radius:12px;
   width:90%;
   max-width:420px;
-  text-align:left;
 }
 
 .hidden{display:none}
+
+@media (orientation:portrait){
+  th.rule{width:80px;font-size:11px}
+  table{font-size:12px}
+}
+@media (orientation:landscape){
+  th.rule{width:120px;font-size:13px}
+  table{font-size:14px}
+}
 </style>
 </head>
 
 <body>
+<button class="themeBtn" onclick="toggleTheme()">🌙 Dark Mode</button>
 <h1>AMERİCANO</h1>
 <div id="app"></div>
 
 <script>
-/* ==== DATA ==== */
+function toggleTheme(){
+  document.body.classList.toggle("dark");
+  document.querySelector(".themeBtn").textContent =
+    document.body.classList.contains("dark") ? "☀️ Light Mode" : "🌙 Dark Mode";
+}
+
+/* ================= DATA ================= */
 const RULES=[
 "KÜT","SERİ","KÜT+ SERİ","2x 3 KÜT","2x 3 SERİ","4 KÜT","4 SERİ",
 "4 KÜT+ SERİ","2 x 4 KÜT","2 x 4 SERİ","5 SERİ","ÇİFT",
@@ -150,7 +183,7 @@ let state={step:"count",count:0,players:[],active:0,joker:""};
 const app=document.getElementById("app");
 render();
 
-/* ==== RENDER ==== */
+/* ================= RENDER ================= */
 function render(){
   app.innerHTML="";
   if(state.step==="count") countScreen();
@@ -158,10 +191,9 @@ function render(){
   if(state.step==="board") boardScreen();
 }
 
-/* ==== SCREENS ==== */
 function countScreen(){
   app.innerHTML=`<div class="screen card center">
-    <h2>Oyuncu Sayısı</h2>
+    <h3>Oyuncu Sayısı</h3>
     ${[2,3,4,5].map(n=>`<button onclick="setCount(${n})">${n}</button>`).join("")}
   </div>`;
 }
@@ -173,7 +205,7 @@ function setCount(n){
 
 function nameScreen(){
   app.innerHTML=`<div class="screen card">
-    <h2>Oyuncu İsimleri</h2>
+    <h3>Oyuncu İsimleri</h3>
     ${Array.from({length:state.count}).map((_,i)=>`
       <input id="p${i}" placeholder="Oyuncu ${i+1}"><br><br>`).join("")}
     <div class="center"><button onclick="start()">Başla</button></div>
@@ -193,25 +225,25 @@ function start(){
   render();
 }
 
-/* ==== BOARD ==== */
+/* ================= BOARD ================= */
 function boardScreen(){
   app.innerHTML=`<div class="screen card">
     <div id="jokerInfo" class="rule-green"></div>
-    <div class="tableWrap"><table id="board"></table></div>
-    <div class="center" id="chanceBtnWrap"></div>
+    <table id="board"></table>
+    <div class="center" id="chanceWrap"></div>
   </div>
 
   <div id="jokerPopup" class="popup hidden">
     <div class="popupBox">
-      <h2>🎲 Joker Eli</h2>
+      <h3>🎲 Joker Eli</h3>
       <button onclick="drawJoker()">Kura Çek</button>
-      <h3 id="jokerAnim"></h3>
+      <h4 id="jokerAnim"></h4>
     </div>
   </div>
 
   <div id="chancePopup" class="popup hidden">
     <div class="popupBox">
-      <h2>Kazanma Şansları</h2>
+      <h3>Kazanma Şansları</h3>
       <div id="chanceText"></div>
       <div class="center"><button class="gray" onclick="closeChance()">Geri</button></div>
     </div>
@@ -219,7 +251,7 @@ function boardScreen(){
 
   <div id="winnerPopup" class="popup hidden">
     <div class="popupBox">
-      <h2>🏆 Sonuç</h2>
+      <h3>🏆 Sonuç</h3>
       <pre id="winnerText"></pre>
       <div class="center">
         <button class="green" onclick="restart()">Tekrar Oyna</button>
@@ -239,10 +271,8 @@ function buildTable(){
   th.textContent="X";
   th.className="rule rule-red";
   tr.appendChild(th);
-
   state.players.forEach(()=>{
     let td=document.createElement("td");
-    td.style.fontWeight="600";
     td.onclick=()=>cyclePenalty(td);
     tr.appendChild(td);
   });
@@ -279,7 +309,7 @@ function buildTable(){
   update();
 }
 
-/* ==== LOGIC ==== */
+/* ================= LOGIC ================= */
 function cyclePenalty(td){
   const seq=["","/","X","X/","XX","XX/","XXX","XXX/","XXXX"];
   let i=seq.indexOf(td.textContent);
@@ -319,7 +349,7 @@ function update(){
           setTimeout(()=>document.getElementById("jokerPopup").classList.remove("hidden"),800);
         }
         if(RULES[i]==="JOKER"){
-          document.getElementById("chanceBtnWrap").innerHTML=
+          document.getElementById("chanceWrap").innerHTML=
             `<button onclick="showChances()">Kazanma Şansları</button>`;
         }
         update();
@@ -346,7 +376,7 @@ function calcAra(){
   }
 }
 
-/* ==== JOKER ==== */
+/* ================= JOKER ================= */
 function drawJoker(){
   let a=document.getElementById("jokerAnim");
   let i=0;
@@ -361,7 +391,7 @@ function drawJoker(){
   },100);
 }
 
-/* ==== KAZANMA ŞANSLARI ==== */
+/* ================= KAZANMA ŞANSLARI ================= */
 function showChances(){
   const rows=document.getElementById("board").rows;
   const araRow=RULES.indexOf("ARA TOPLAM")+2;
@@ -381,14 +411,18 @@ function showChances(){
   arr.forEach((p,i)=>{
     let diff=p.score-first;
     let text="";
-
     if(i===0 || diff<=90) text="Biterse kazanır";
     else if(diff<=125) text="Biterse kazanamayabilir, Job denenebilir";
     else if(diff<=200) text="Job'la kazanır";
     else if(diff<=350) text="Job yetmeyebilir";
     else text="Boşver kanka sen";
 
-    html+=`<p><b>${p.name}</b>: ${text}</p>`;
+    html+=`
+      <p>
+        <b>${p.name}</b> ${i===0?"(Lider)":"– "+(i+1)+"."}<br>
+        ${i===0?"":"Fark: "+diff}<br>
+        ${text}
+      </p><hr>`;
   });
 
   document.getElementById("chanceText").innerHTML=html;
@@ -399,7 +433,7 @@ function closeChance(){
   document.getElementById("chancePopup").classList.add("hidden");
 }
 
-/* ==== WINNER ==== */
+/* ================= WINNER ================= */
 function showWinner(){
   const rows=document.getElementById("board").rows;
   let res=[];
