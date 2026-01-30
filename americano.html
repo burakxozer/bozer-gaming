@@ -269,6 +269,77 @@ table{
     font-size: 12px;
   }
 }
+/* === MOBİL DİKEY SON İNCE AYAR === */
+@media (max-width: 480px){
+
+  /* Satır yüksekliği son kırpma */
+  tr{
+    height: 28px;
+  }
+
+  th, td{
+    padding: 1px 2px;
+  }
+
+  /* Input kutuları */
+  .cell{
+    height: 22px;
+    padding: 1px;
+    font-size: 11px;
+    border-radius: 4px;
+  }
+
+  /* Ara toplam satırı ekstra incelsin */
+  .ara td{
+    padding: 1px;
+  }
+
+  /* Kural yazıları biraz daha sık */
+  th.rule{
+    font-size: 10.5px;
+    line-height: 1.05;
+  }
+}
+/* === MOBİL SAĞ KENAR SON DÜZELTME === */
+@media (max-width: 480px){
+
+  .tableWrap{
+    padding-right: 12px;   /* 👈 EN KRİTİK SATIR */
+  }
+
+  table{
+    margin-right: 8px;     /* iOS scroll güvenliği */
+  }
+
+}
+/* === iOS SON PİKSEL AYARI === */
+@media (max-width: 480px){
+
+  /* Kart iç boşluğu biraz daralt */
+  .card{
+    padding-right: 6px;
+    padding-left: 6px;
+  }
+
+  /* Scroll alanı tam aç */
+  .tableWrap{
+    margin-right: -6px;
+    padding-right: 16px;
+  }
+
+  /* Tabloyu çok az sola çek */
+  table{
+    margin-left: -2px;
+  }
+
+}
+/* === MOBIL MIKRO SCALE (FINAL) === */
+@media (max-width: 480px){
+  .tableWrap{
+    transform: scale(0.97);
+    transform-origin: top center;
+  }
+}
 
 </style>
 </head>
