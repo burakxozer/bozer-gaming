@@ -151,9 +151,16 @@ input{width:100%;padding:14px;font-size:20px;border-radius:14px;border:none;marg
 
 .standing-team{
   font-weight:600;
-  white-space: nowrap;
+
+  /* iki satıra izin ver */
+  white-space: normal;
   overflow: hidden;
-  text-overflow: ellipsis;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2;        /* maksimum 2 satır */
+  -webkit-box-orient: vertical;
+
+  line-height: 1.2;
 }
 
 .standing-set{
@@ -174,11 +181,11 @@ input{width:100%;padding:14px;font-size:20px;border-radius:14px;border:none;marg
   .standing-row{
     grid-template-columns:
       22px     /* # */
-      1fr      /* takım */
-      32px     /* O */
-      32px     /* G */
-      32px     /* M */
-      56px     /* Set */
+      1.4fr      /* takım */
+      30px     /* O */
+      30px     /* G */
+      30px     /* M */
+      52px     /* Set */
       36px;    /* P */
   }
 }
