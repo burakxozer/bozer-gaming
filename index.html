@@ -343,9 +343,12 @@ iframe{
     <li>2-5 kişi ile oynanabilir.</li>
     <li>Sol sütunda kural eli güncel olarak gösterilir.</li>
     <li>Bir kural satırında tüm oyunculara puan yazılmadan, altta kalan diğer sütunlar hesaba katılmaz. Mevcut kuraldaki tüm oyuncuların puan hanesi doldurulduğu anda puanlar otomatik olarak toplanıp ara toplama yazılır ve sıra bir alttaki kurala geçer.</li>
-    <li>Normal bitişler için "-" veya "/" kullanabilirsiniz. Job bitişler için "X" kullanabilirsiniz.</li>
-    <li>"Joker" eline geçildiği zaman (çift eli tamamen doldurulduktan sonra) sistem otomatik olarak joker eli için kura çeker. Kura sonucunu sayfanın sol üstünde gösterir.</li>
-<li>Joker eli doldurulduktan sonra ekranın en altına "Kazanma Şansları" butonu gelir. Bu buton sayesinde, liderle diğer oyuncuların arasındaki puan farklarını ve Konken elinde kazanmak için yapmanız gerekenleri öğrenebilirsiniz. </li>
+    <li>Oyunda bazı kuralları oynamak istemiyorsanız, o elde oyunculara 0 puan girebilirsiniz. Aksi halde kural eli, oyunculara puan girilmediği için sabit kalır. </li>
+    <li>Bir oyuncuya ceza yazmak için, ceza satırının oyuncuya denkgelen hücresine tıklayarak yazabilirsiniz. Bir oyuncuya en fazla 8 ceza yazılabilecek şekilde tasarlanmıştır. Daha fazla ceza olması durumunda, oyuncuya puan olarak ekleyebilirsiniz. </li>
+<li>Ceza hücreleri 8 cezadan sonra başa döner ve sıfırlanır. Yanlış ceza işlenmesi durumunda tıklayarak en başa dönüp tekrar işleyebilirsiniz.</li>
+    <li>Normal bitişler için "-" veya "/" yazabilirsiniz. Job bitişler için "X" yazabilirsiniz. Çift elinde Job ile bitiş yapılırsa "XX" de yazabilirsiniz. </li>
+    <li>"Joker" eline geçildiği zaman (çift eli tamamen doldurulduktan sonra) ekrana otomatik olarak "Joker Eli için Kura Çek" tuşu gelir. Konken eli dahil olmak üzere tüm kurallar arasında kura çekilir. Kura sonucu sayfanın sol üstünde gösterilir.</li>
+<li>Joker eli doldurulduktan sonra ekranın en altına "Kazanma Şansları" butonu gelir. Bu buton sayesinde, liderle diğer oyuncuların arasındaki puan farklarını ve Konken elinde kazanmak için yapmanız gereken stratejileri öğrenebilirsiniz. </li>
 <li>"Konken" eli için tüm oyuncuların puanları girildikten 3 saniye sonra oyunun sonucu ve sıralama gösterilir.</li>
 
   </ul>
@@ -612,3 +615,4 @@ renderContinue();
 
 </body>
 </html>
+
