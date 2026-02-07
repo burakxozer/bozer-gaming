@@ -433,6 +433,25 @@ body.theme-steel{
     linear-gradient(0deg,rgba(255,255,255,.02),rgba(0,0,0,.02));
 }
 
+.app-version{
+  position:fixed;
+  right:24px;
+  bottom:calc(10px + env(safe-area-inset-bottom));
+  font-size:11px;
+  color:var(--muted);
+  opacity:.6;
+  letter-spacing:.5px;
+  pointer-events:none;
+}
+
+
+@media(max-width:600px){
+  .app-version{
+    font-size:10px;
+    bottom:8px;
+  }
+}
+
 
 </style>
 </head>
@@ -795,6 +814,8 @@ function openRules(e, el){
     <div id="infoModalContent"></div>
   </div>
 </div>
+
+<div class="app-version">v1.00</div>
 
 
 </body>
