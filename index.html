@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Bozer Gaming</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background:
+                radial-gradient(circle at top, #17221d 0%, #0b0b0f 45%),
+                #0b0b0f;
+            font-family: Arial, Helvetica, sans-serif;
+            color: white;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+            padding: 42px 35px;
+            text-align: center;
+            background: rgba(20, 21, 27, 0.95);
+            border: 1px solid #292d35;
+            border-radius: 22px;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.6);
+        }
+
+        .logo {
+            font-size: 34px;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 28px;
+        }
+
+        .logo span {
+            color: #00ff88;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 7px 13px;
+            margin-bottom: 18px;
+            border-radius: 20px;
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid rgba(0, 255, 136, 0.25);
+            color: #00ff88;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        h1 {
+            font-size: 26px;
+            margin-bottom: 13px;
+        }
+
+        .description {
+            color: #a8a8b0;
+            font-size: 14px;
+            line-height: 1.7;
+            margin-bottom: 28px;
+        }
+
+        .features {
+            display: flex;
+            flex-direction: column;
+            gap: 11px;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 13px 14px;
+            background: #1b1c23;
+            border: 1px solid #292b34;
+            border-radius: 11px;
+            color: #ddd;
+            font-size: 14px;
+        }
+
+        .icon {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            border-radius: 8px;
+            background: rgba(0, 255, 136, 0.1);
+            color: #00ff88;
+            font-size: 16px;
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 16px;
+            border-radius: 11px;
+            background: #00ff88;
+            color: #050505;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 800;
+            transition: 0.2s ease;
+            box-shadow: 0 8px 25px rgba(0, 255, 136, 0.15);
+        }
+
+        .btn:hover {
+            background: #00e87a;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(0, 255, 136, 0.25);
+        }
+
+        .footer {
+            margin-top: 18px;
+            color: #5f6169;
+            font-size: 11px;
+        }
+
+        @media (max-width: 500px) {
+            .container {
+                padding: 32px 22px;
+            }
+
+            .logo {
+                font-size: 29px;
+            }
+
+            h1 {
+                font-size: 23px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="logo">
+            BOZER <span>GAMING</span>
+        </div>
+
+        <div class="badge">
+            🚀 YENİ DENEME SİTESİ
+        </div>
+
+        <h1>Yeni Bozer Gaming'e Hoş Geldin!</h1>
+
+        <p class="description">
+            Daha gelişmiş özelliklerle oyun deneyimine devam et.
+            Yeni sitemizde oyunlarını kaydedebilir, arkadaşlarınla
+            oynayabilir ve onların oyunlarını anlık olarak izleyebilirsin.
+        </p>
+
+        <div class="features">
+
+            <div class="feature">
+                <div class="icon">💾</div>
+                <div>
+                    <strong>Oyunlarını Kaydet</strong><br>
+                    Oyun ilerlemelerin ve sonuçların kaydedilir.
+                </div>
+            </div>
+
+            <div class="feature">
+                <div class="icon">👥</div>
+                <div>
+                    <strong>Arkadaşlarını Gör</strong><br>
+                    Arkadaşlarının oyun durumlarını takip edebilirsin.
+                </div>
+            </div>
+
+            <div class="feature">
+                <div class="icon">👁️</div>
+                <div>
+                    <strong>Arkadaşlarının Oyunlarını İzle</strong><br>
+                    Arkadaşlarının oynadığı oyunları anlık olarak izleyebilirsin.
+                </div>
+            </div>
+
+            <div class="feature">
+                <div class="icon">⚡</div>
+                <div>
+                    <strong>Daha Hızlı ve Gelişmiş Sistem</strong><br>
+                    Yeni özellikler ve geliştirmelerle devam ediyoruz.
+                </div>
+            </div>
+
+        </div>
+
+        <a
+            class="btn"
+            href="https://bozergaming.abacusai.app"
+        >
+            🎮 Yeni Sitede Devam Et
+        </a>
+
+        <div class="footer">
+            Bozer Gaming • Yeni deneyim, yeni özellikler.
+        </div>
+
+    </div>
+
+</body>
+</html>
