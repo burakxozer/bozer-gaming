@@ -1,0 +1,4573 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Bozer Gaming</title>
+</head>
+<body>
+<div id="app">
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Bözer Gaming</title>
+
+<style>
+/* ================= THEMES ================= */
+body.theme-dark{
+  --bg:#0b1220;
+  --panel:#111827;
+  --card:#020617;
+  --accent:#22c55e;
+  --text:#e5e7eb;
+  --muted:#9ca3af;
+  --border:#1f2937;
+  background:radial-gradient(circle at top,#020617,#0b1220);
+}
+body.theme-light{
+  --bg:#f4f6f8;
+  --panel:#ffffff;
+  --card:#ffffff;
+  --accent:#2563eb;
+  --text:#111827;
+  --muted:#6b7280;
+  --border:#e5e7eb;
+  background:#f4f6f8;
+}
+body.theme-green{
+  --bg:#0b2e1a;
+  --panel:#0f3d25;
+  --card:#134e32;
+  --accent:#22c55e;
+  --text:#e6fffa;
+  --muted:#a7f3d0;
+  --border:#166534;
+  background:radial-gradient(circle at top,#134e32,#0b2e1a);
+}
+body.theme-purple{
+  --bg:#1b102d;
+  --panel:#2a174a;
+  --card:#3b1f6b;
+  --accent:#a855f7;
+  --text:#f5f3ff;
+  --muted:#ddd6fe;
+  --border:#6d28d9;
+  background:radial-gradient(circle at top,#3b1f6b,#1b102d);
+}
+body.theme-steel{
+  --bg:#1a1d21;
+  --panel:#23272e;
+  --card:#2b3038;
+  --accent:#f97316;
+  --text:#e5e7eb;
+  --muted:#9ca3af;
+  --border:#3f3f46;
+  background:radial-gradient(circle at top,#2b3038,#1a1d21);
+}
+body.theme-red{
+  --bg:#2a0b0b;
+  --panel:#3b0f0f;
+  --card:#4c1414;
+  --accent:#ef4444;
+  --text:#fee2e2;
+  --muted:#fecaca;
+  --border:#7f1d1d;
+  background:radial-gradient(circle at top,#4c1414,#2a0b0b);
+}
+body.theme-midnight{
+  --bg:#020617;
+  --panel:#020c2a;
+  --card:#020e3a;
+  --accent:#38bdf8;
+  --text:#e0f2fe;
+  --muted:#7dd3fc;
+  --border:#1e3a8a;
+  background:radial-gradient(circle at top,#020e3a,#020617);
+}
+
+
+/* ================= BASE ================= */
+*{box-sizing:border-box;font-family:system-ui}
+body{margin:0;color:var(--text);-webkit-tap-highlight-color:transparent}
+.app{max-width:1100px;margin:auto;padding:16px}
+h1,h2{text-align:center;margin:10px 0 14px}
+.desc{text-align:center;color:var(--muted);margin-bottom:20px}
+
+/* ================= GRID ================= */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:16px;
+}
+
+/* ================= CARD ================= */
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:20px;
+  box-shadow:0 16px 36px rgba(0,0,0,.45);
+  transition:.2s ease;
+}
+@media (hover:hover){
+  .card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 26px 56px rgba(0,0,0,.65);
+  }
+}
+.card h3{
+  margin:0 0 6px;
+  font-size:20px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.card span{font-size:14px;color:var(--muted)}
+.icon{font-size:24px}
+
+/* ================= FEATURES ================= */
+.features{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.feature{
+  font-size:12px;
+  padding:4px 10px;
+  border-radius:999px;
+  background:var(--panel);
+  border:1px solid var(--border);
+}
+
+/* ================= BUTTON ================= */
+.btn{
+  width:100%;
+  margin-top:14px;
+  padding:14px;
+  font-size:16px;
+  font-weight:700;
+  border:none;
+  border-radius:14px;
+  background:var(--accent);
+  color:#000;
+}
+.btn.gray{background:#334155;color:#fff}
+
+/* ================= CTA VIDEO ================= */
+.video-cta{
+  margin-top:32px;
+  padding:22px;
+  border-radius:20px;
+  border:1px dashed var(--border);
+  background:linear-gradient(135deg,rgba(255,255,255,.08),transparent);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  gap:10px;
+}
+.video-cta .icon{font-size:36px}
+.video-cta a{
+  text-decoration:none;
+  padding:12px 22px;
+  border-radius:999px;
+  background:var(--accent);
+  color:#000;
+  font-weight:700;
+}
+
+/* ================= VIEW ================= */
+.view{display:none;animation:fade .3s ease}
+.view.active{display:block}
+iframe{
+  width:100%;
+  height:82vh;
+  border:none;
+  border-radius:16px;
+  margin-top:12px;
+}
+@keyframes fade{
+  from{opacity:0;transform:translateY(8px)}
+  to{opacity:1;transform:none}
+}
+
+/* ================= SETTINGS ================= */
+.settings{
+  position:fixed;
+  bottom:16px;
+  right:16px;
+  z-index:100;
+}
+.settings button{
+  width:56px;
+  height:56px;
+  border-radius:50%;
+  border:none;
+  background:#334155;
+  color:#fff;
+  font-size:22px;
+}
+.settings-panel{
+  position:fixed;
+  bottom:84px;
+  right:16px;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:14px;
+  width:260px;
+  display:none;
+}
+.settings-panel.active{display:block}
+.settings-panel label{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:12px;
+}
+
+/* ================= MOBILE ================= */
+@media(max-width:600px){
+  .grid{grid-template-columns:1fr}
+  iframe{height:78vh}
+}
+/* INFO BUTTON */
+.info-btn{
+  margin-left:6px;
+  font-size:14px;
+  cursor:pointer;
+  opacity:.6;
+}
+.info-btn:hover{
+  opacity:1;
+}
+
+/* INFO PANEL */
+.info-panel{
+  display:none;
+  margin-top:12px;
+  padding:12px;
+  border-radius:10px;
+  background:var(--panel);
+  border:1px solid var(--border);
+  font-size:14px;
+}
+
+.info-panel h4{
+  margin:0 0 8px;
+  font-size:15px;
+}
+
+.info-panel ul{
+  padding-left:18px;
+  margin:0 0 10px;
+}
+
+.info-panel li{
+  margin-bottom:4px;
+}
+
+/* CLOSE BUTTON */
+.close-info{
+  width:100%;
+  padding:8px;
+  border:none;
+  border-radius:8px;
+  background:var(--accent);
+  color:#000;
+  font-weight:600;
+}
+
+/* INFO MODAL */
+.info-modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.55);
+  backdrop-filter:blur(4px);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:999;
+}
+
+.info-modal.active{
+  display:flex;
+}
+
+.info-modal-card{
+  background:var(--card);
+  color:var(--text);
+  border-radius:18px;
+  padding:20px;
+  max-width:520px;
+  width:92%;
+  max-height:80vh;
+  overflow:auto;
+  border:1px solid var(--border);
+  box-shadow:0 30px 80px rgba(0,0,0,.6);
+}
+
+/* MODAL CLOSE (X) */
+.modal-close{
+  position:absolute;
+  top:12px;
+  right:14px;
+  background:transparent;
+  border:none;
+  font-size:20px;
+  color:var(--muted);
+  cursor:pointer;
+}
+.modal-close:hover{
+  color:var(--text);
+}
+.info-modal-card{
+  position:relative;
+}
+
+/* FULLSCREEN GAME MODE */
+.view.game-full{
+  position:fixed;
+  inset:0;
+  padding:0;
+  margin:0;
+  background:var(--bg);
+  z-index:999;
+}
+
+.view.game-full iframe{
+  width:100vw;
+  height:100vh;
+  border-radius:0;
+  margin:0;
+}
+
+.game-close{
+  position:fixed;
+  top:10px;
+  right:12px;
+  z-index:1000;
+  background:rgba(0,0,0,.4);
+  border:none;
+  color:#fff;
+  font-size:22px;
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  backdrop-filter:blur(6px);
+}
+
+.rules-btn{
+  margin-left:4px;
+  font-size:14px;
+  cursor:pointer;
+  opacity:.6;
+}
+.rules-btn:hover{
+  opacity:1;
+  color:var(--accent);
+}
+
+.rules-panel{
+  display:none;
+  margin-top:12px;
+  padding:12px;
+  border-radius:10px;
+  background:var(--panel);
+  border:1px solid var(--border);
+  font-size:14px;
+}
+
+.rules-btn{
+  font-size:15px;
+}
+
+html, body{
+  width:100%;
+  height:100%;
+  overflow-x:hidden;
+}
+
+.card{
+  transition:
+    transform .25s cubic-bezier(.2,.8,.2,1),
+    box-shadow .25s cubic-bezier(.2,.8,.2,1);
+}
+
+.btn:active{
+  transform:scale(.97);
+  filter:brightness(.95);
+}
+
+.info-modal-card{
+  animation:modalIn .25s ease;
+}
+
+@keyframes modalIn{
+  from{
+    opacity:0;
+    transform:translateY(12px) scale(.98);
+  }
+  to{
+    opacity:1;
+    transform:none;
+  }
+}
+
+h1{
+  letter-spacing:.5px;
+}
+.card h3{
+  font-weight:600;
+}
+
+.icon{
+  font-size:22px;
+}
+
+.settings-panel{
+  box-shadow:0 20px 50px rgba(0,0,0,.5);
+}
+
+.settings button:hover{
+  background:var(--accent);
+  color:#000;
+}
+
+#continue .card{
+  border:1px dashed var(--accent);
+}
+
+body.theme-steel{
+  background:
+    radial-gradient(circle at top,#2b3038,#1a1d21),
+    linear-gradient(0deg,rgba(255,255,255,.02),rgba(0,0,0,.02));
+}
+
+.app-version{
+  position:fixed;
+  right:24px;
+  bottom:calc(10px + env(safe-area-inset-bottom));
+  font-size:11px;
+  color:var(--muted);
+  opacity:.6;
+  letter-spacing:.5px;
+  pointer-events:none;
+}
+
+
+@media(max-width:600px){
+  .app-version{
+    font-size:10px;
+    bottom:8px;
+  }
+}
+
+@media(max-width:768px){
+  .app{
+    padding:12px;
+  }
+}
+
+.grid{
+  max-width:1200px;
+  margin:auto;
+}
+
+
+</style>
+</head>
+
+<body>
+<div class="app">
+
+<!-- HOME -->
+<div id="home" class="view active">
+  <h1>🎮 Bözer Gaming 🎮</h1>
+  <p class="desc">Mini Oyun Platformu</p>
+
+  <div class="grid">
+    <div class="card" onclick="openGame('americano.html','Americano')">
+      <h3>
+  <span class="icon">🧮</span> Americano
+
+<span class="rules-btn" title="Americano Oyun Kuralları"
+        onclick="openRules(event,this)">📜</span>
+
+  <span class="info-btn" onclick="openInfo(event,this)">ⓘ</span>
+</h3>
+
+
+      <span>Puan & Strateji Oyunu</span>
+      <div class="features"><div class="feature">2–5 Oyuncu</div></div>
+      <button class="btn">Oyna</button>
+
+<div class="rules-panel">
+  <h4>Americano Oyun Kuralları</h4>
+
+  <ul>
+    <li>Oyun 2 adet tam deste (52*2=104) ve 2 adet Job ile toplamda 106 kağıtla oynanır.</li>
+<li>Dağıtıcı, 106 kağıdı karıştırıp sol tarafında bulunan oyuncuya desteyi kestirir. Desteyi kesen oyuncu kestiği kısmın en altındaki kağıdı açıp kalan desteyi de açık kağıdın üstüne koyar. Eğer açılan kağıt Job ise kesen oyuncu o tur için alır. Dağıtıcı oyunu sağından başlayarak saat yönünün tersinde dağıtır, Job kesen oyuncuya normal dağıtması gerekenden 1 kağıt eksik dağıtır.</li>
+<li>Dağıtıcının sağındaki oyuncuya 14, diğer tüm oyunculara 13 kağıt dağıtılır. 14 kağıt dağıtılan oyuncu ilk tur ortadan kağıt çekmez, atarak başlar.</li>
+<li>Atılacak kağıtlar masanın ortasına üst üste atılır. Oyuncular, solundaki oyuncunun attığı her kağıdı alabilir. Aynı zamanda solundaki oyuncunun haricinde diğer oyuncuların attığı kağıtları da öncelik sırasına göre ve ceza 1 kağıt çekmek şartıyla, her turda en fazla 3 kez alabilir.</li>
+<li>Öncelik sırası, kağıt atan kişiden sonra oyun yönündeki kişi öncelik sahibidir, almayacağını söylerse öncelik bir sonraki oyuncuya geçer ve tüm oyuncular arasında bu kuralla devam eder.</li>
+<li>Bir oyuncu ceza çekmemesi durumunda 13, 1 ceza çekerse 15, 2 ceza çekerse 17, 3 ceza çekerse 19 kağıda sahip olabilir. Sıra oyuncuya geldiğinde solundaki oyuncudan veya ortadan kağıt alır, kağıdı atmadığı ve per açıp işlemediği sürece kağıt sayısı çifttir. Kağıdı attıktan sonra kağıt sayısı yine tek sayı kalır. (13,15,17,19)</li>
+
+    <li>Oyunda per açabilmek için öncelikle o elin kuralını uygulamak gerekir. Mevcut kuralı uygulamadan per açılamaz, işlenemez.</li>
+    <li>Seri, küt ve çift olmak üzere 3 farklı per açma şekli vardır. Çift per sadece "Çift" kural elinde, el başında kuralı uygulamak için açılabilir. Diğer hiçbir turda veya çift turu devamında başka çift açılamaz.</li>
+<li>Kağıtların sıralaması: A-2-3-4-5-6-7-8-9-10-J-Q-K </li>
+<li>Seri: ♠️♦️♣️♥️ olmak üzere 4 kağıt türünden herhangi birinde ardışık sıralı perleri temsil eder. Q-K-A veya A-2-3 perleri yapılabilir, K-A-2 peri yapılamaz. Örneğin ♦️5 - ♦️6 - ♦️7 --> 3lü seri için uygundur. </li>
+<li>Küt: ♠️♦️♣️♥️ türlerinin aynı değerdeki kağıtlarının 3 tanesi 3lü küt, 4ünün de tamamlanması 4lü küt anlamına gelir. Örneğin ♠️8 - ♦️8 - ♣️8 --> 3lü küt açmak için uygun bir perdir. </li>
+<li>Çift: Herhangi bir kağıdın aynısı ile oluşturulur. Örneğin ♣️Q - ♣️Q --> 1 adet çift anlamına gelir. Çift eli kuralı için 3 çift açmak gerekir. Bu kural haricinde oyunun hiçbir turunda/elinde çift açılamaz </li>
+<li>Herhangi bir oyuncu tur kuralını uygulamadan işleme yapamaz.</li>
+<li>Her turda oyun dağıtıldığı el, oyun sırası 1 kez daha gelmeden tur kuralını açmak için el uygun olsa dahi per açılamaz. Oyuncuya 2.kez sıra geldiği zaman tur kuralını açabilir. </li>
+<li>Tur kuralının açıldığı sırada başka per açma veya işlek işleme yapılamaz. Tur kuralı uygulandığı zaman sadece kurala uygun per/perler açılabilir. Oyuncu per veya işlek için 1 kez daha sıra gelmesini beklemek zorundadır.</li>
+<li>Oyunda bitiş, tüm kağıtlarını per açarak veya işleyerek masaya indirdikten sonra bitiş kağıdını ortaya atmak şartıyla yapılabilir. Örneğin oyuncunun elinde ♠️8  ♠️9  ♠️10 --> peri kaldı ise bunu masaya koyarak bitemez, mutlaka ortaya bitiş kağıdı atmak zorundadır. </li>
+<li>Oyunda Job harici bir kağıtla bitmek -25 puandır. / veya - ile gösterilir. Çift elinde normal kağıtla bitilirse biten oyuncu -50 puan alır ve diğer oyuncular elinde kalan sayıların toplamının 2 katını yer.</li>
+<li>Job'la bitiş -50 puandır ve diğer oyuncular elinde kalan sayıların toplamının 2 katını yer. X ile gösterilir. Çift elinde Job ile bitilirse XX ile -100 puan alınır ve diğer oyuncular elindeki sayıların toplamının 4 katını yer.</li>
+<li>İşlek kağıt veya Job atmak (eğer bitmiyorsa) +25 puan cezadır.</li>
+<li>Yerde açılan perlerde Job'u başkası tarafından alınan oyuncu +25 puan ceza yer.</li>
+<li>Hatalı el açıp geri toplamak +25 puan cezadır.</li>
+<li>Oyun bittiğinde elde kalan sayılar toplanırken 2-3-4-5-6-7-8-9-10 --> kendi sayısal değerleri olarak sayılır. J-Q-K-A --> 10 puan değerindedir. Job ise 25 puan sayılır.</li>
+<li>Oyuncu son kağıdını atmadan, o elde yaptığı işlekleri/perleri vb. geri alabilir, başka yere işleyebilir.</li>
+<li>Çift elinde yazılan ceza 2 kat yazılır.</li>
+
+<li>Konken: Düz okey gibi tüm kağıtların per oluşturup, bitiş kağıdının ortaya atılmasıyla biter.</li>
+    <li>En düşük toplam puana sahip oyuncu kazanır.</li>
+      </ul>
+</div>
+
+
+<div class="info-panel">
+  <h4>Americano Scoreboard Nasıl Kullanılır?</h4>
+
+  <ul>
+    <li>2-5 kişi ile oynanabilir.</li>
+    <li>Sol sütunda kural eli güncel olarak gösterilir.</li>
+    <li>Bir kural satırında tüm oyunculara puan yazılmadan, altta kalan diğer sütunlar hesaba katılmaz. Mevcut kuraldaki tüm oyuncuların puan hanesi doldurulduğu anda puanlar otomatik olarak toplanıp ara toplama yazılır ve sıra bir alttaki kurala geçer.</li>
+    <li>Oyunda bazı kuralları oynamak istemiyorsanız, o elde oyunculara 0 puan girebilirsiniz. Aksi halde kural eli, oyunculara puan girilmediği için sabit kalır. </li>
+    <li>Bir oyuncuya ceza yazmak için, ceza satırının oyuncuya denkgelen hücresine tıklayarak yazabilirsiniz. Bir oyuncuya en fazla 8 ceza yazılabilecek şekilde tasarlanmıştır. Daha fazla ceza olması durumunda, oyuncuya puan olarak ekleyebilirsiniz. </li>
+<li>Ceza hücreleri 8 cezadan sonra başa döner ve sıfırlanır. Yanlış ceza işlenmesi durumunda tıklayarak en başa dönüp tekrar işleyebilirsiniz.</li>
+    <li>Normal bitişler için "-" veya "/" yazabilirsiniz. Job bitişler için "X" yazabilirsiniz. Çift elinde Job ile bitiş yapılırsa "XX" de yazabilirsiniz. </li>
+    <li>"Joker" eline geçildiği zaman (çift eli tamamen doldurulduktan sonra) ekrana otomatik olarak "Joker Eli için Kura Çek" tuşu gelir. Konken eli dahil olmak üzere tüm kurallar arasında kura çekilir. Kura sonucu sayfanın sol üstünde gösterilir.</li>
+<li>Joker eli doldurulduktan sonra ekranın en altına "Kazanma Şansları" butonu gelir. Bu buton sayesinde, liderle diğer oyuncuların arasındaki puan farklarını ve Konken elinde kazanmak için yapmanız gereken stratejileri öğrenebilirsiniz. </li>
+<li>"Konken" eli için tüm oyuncuların puanları girildikten 3 saniye sonra oyunun sonucu ve sıralama gösterilir.</li>
+
+  </ul>
+</div>
+    </div>
+
+    <div class="card" onclick="openDart()">
+      <h3><span class="icon">🎯</span> Dart</h3>
+      <span>Karambol Kriket Dart Oyunu</span>
+      <div class="features"><div class="feature">Antrenman</div><div class="feature">Turnuva</div><div class="feature">Maç</div></div>
+      <button class="btn">Aç</button>
+    </div>
+
+    <div class="card" onclick="openGame('kura-cek.html','Kura Çek')">
+      <h3>
+  <span class="icon">🎲</span> Kura Çek
+  <span class="info-btn" onclick="openInfo(event,this)">ⓘ</span>
+</h3>
+      <span>Çekiliş, Kura vb.</span>
+      <div class="features"><div class="feature">Çekiliş</div><div class="feature">Grup Kurası</div><div class="feature">Turnuva</div></div>
+      <button class="btn">Aç</button>
+<div class="info-panel">
+  <h4>Kura Çek Nasıl Kullanılır?</h4>
+  <ul>
+    <li>3 moddan oluşur: Çekiliş, Grup Kurası ve Turnuva.</li>
+    <li>"Çekiliş Yap" modunda; katılımcı ve kazanacak kişi sayısı girerek, yazacağınız isimler içerisinden kazananı rastgele belirleyebilirsiniz.</li>
+    <li>"Grup Kurası" modu ile; yazacağınız kişileri, istediğiniz grup sayısına rastgele olarak bölebilirsiniz.</li>
+<li>Turnuva modu ile; Grup Kurası gibi gruplara ayırıp, sonrasında rastgele eşleşmelerle eleme usulü turnuva şampiyonu belirleyebilirsiniz.</li>
+<li>Turnuva Modu'nda 4 veya 8 takımda problem yaşanmaz, takım sayısı tek sayı ise ve BAY geçme durumu söz konusuysa hata verir.</li>
+<li>Turnuva başladıktan sonra maça tıklayarak kazananı seçerek diğer turlara geçiş yapabilirsiniz.</li>  
+</ul>
+</div>
+
+    </div>
+
+    <!-- LİG OLUŞTUR -->
+    <div class="card" onclick="openGame('lig.html','Lig Oluştur')">
+     <h3>
+  <span class="icon">🏟️</span> Lig Oluştur
+  <span class="info-btn" onclick="openInfo(event,this)">ⓘ</span>
+</h3>
+      <span>Lig oluşturma ve yönetim</span>
+      <button class="btn">Aç</button>
+<div class="info-panel">
+  <h4>Lig Oluştur Nasıl Kullanılır?</h4>
+  <ul>
+    <li>İstediğiniz takım sayısında lig oluşturabilirsiniz.</li>
+    <li>"Tek Karşılaşma" , "Çift Karşılaşma" seçenekleriyle oluşan takımların birbiriyle kaç kez karşılaşacağını belirleyin.</li>
+<li>Maça tıklayarak maçın galibini seçin. 
+  1 Fark (2-1); kazanan takım 2 puan alır, kaybeden takım 1 puan alır. 
+  2 Fark (2-0); kazanan takım 3 puan alır, kaybeden takım puan alamaz.</li>
+    <li>Takım sayısı tek sayı ise BAY geçecek takım rastgele belirlenir. BAY geçen takım 1 puan alır. O turdaki bütün maçlar girildikten sonra puan durumuna yazılır.</li>
+  
+</ul>
+</div>
+
+    </div>
+    <div class="card" onclick="openGame('somali.html','Somali')">
+      <h3>
+  <span class="icon">🎴</span> Somali
+  <span class="info-btn" onclick="openInfo(event,this)">ⓘ</span>
+</h3>
+      <span>Okey Tabanlı Bahis Oyunu</span>
+      <div class="features"><div class="feature">Tekli</div><div class="feature">Eşli</div></div>
+      <button class="btn">Oyna</button>
+<div class="info-panel">
+  <h4>Somali Scoreboard Nasıl Kullanılır?</h4>
+  <ul>
+    <li>İsim yazma ekranında takımları karıştır tuşu ile rastgele masa yerleşimi yapabilirsiniz.</li>
+    <li>Başlangıç sayısı ekranından, kaç puandan düşüleceğini girin. (Genellikle 10'dan düşülür)</li>
+    <li>Bahis ekranında gireceğiniz miktarla, sayısı kaçtan hesaplanacağını belirleyin.</li>
+<li>Oyun başladıktan sonra "İşlem Yap" tuşu ile düz bitiş, okey bitiş veya gösterge için veri girin.</li>
+<li>Oyunda her tur kaydedilir ve "Güncel Durum" butonu sayesinde turlar ve genel toplama ulaşılabilir.</li>
+  </ul>
+</div>
+
+
+    </div>
+
+  </div>
+
+  <div id="continue" class="grid" style="margin-top:24px"></div>
+</div>
+
+<!-- DART -->
+<div id="dart" class="view">
+  <h2>🎯 Dart Modları</h2>
+  <p class="desc">Tüm dart oyunları tek yerde</p>
+
+  <div class="grid">
+    <div class="card" onclick="openGame('dart/dartbot-v1.html','Dartbot v1')">
+      <h3><span class="icon">🤖</span> Dartbot v1
+<span class="info-btn" onclick="openInfo(event, this)">ⓘ</span>
+</h3>
+      <span>Bota karşı Karambol Kriket</span>
+      <div class="features"><div class="feature">Karambol Kriket</div><div class="feature">1–10 LvL Bot</div></div>
+<div class="info-panel">
+  <h4>Dartbot Nasıl Oynanır?</h4>
+
+  <ul>
+    <li>Karambol Kriket oyun kuralları geçerlidir.</li>
+<li>11 farklı seviye bottan oluşur. Bot seviyesi arttıkça zorluk artar.</li>
+<li>Botun temel hedefi house atmak, sonrasında da kalan kuralları tamamlamaktır.</li>
+    <li>Kuralları bilmiyorsanız dart modu içinde en altta Youtube videosuna girerek öğrenebilirsiniz.</li>
+      </ul>
+
+</div>
+
+      <button class="btn">Başla</button>
+    </div>
+
+
+    <div class="card" onclick="openGame('dart/dart-turnuva.html','Dart Turnuva')">
+      <h3><span class="icon">🏆</span> Turnuva</h3>
+      <span>Eleme sistemi</span>
+      <div class="features">
+        <div class="feature">Karambol Kriket</div>
+        <div class="feature">Max 8 Takım</div>
+        <div class="feature">Otomatik Eşleşme</div>
+      </div>
+      <button class="btn">Başla</button>
+    </div>
+
+    <div class="card" onclick="openGame('dart/dart-mac.html','Dart Maç')">
+      <h3><span class="icon">⚔️</span> Dart Maç</h3>
+      <span>Hızlı skor takibi</span>
+      <div class="features">
+        <div class="feature">Karambol Kriket</div>
+        <div class="feature">Max 4 Takım</div>
+        <div class="feature">Tek Maç</div>
+      </div>
+      <button class="btn">Başla</button>
+    </div>
+  </div>
+
+  <div class="video-cta">
+    <div class="icon">📺</div>
+    <strong>Karambol Kriket Nasıl Oynanır?</strong>
+    <span>Kuralları öğren, daha hızlı başla</span>
+    <a href="https://www.youtube.com/watch?v=mSMOEP9QWJk" target="_blank">
+      YouTube’da İzle ▶
+    </a>
+  </div>
+
+  <button class="btn gray" onclick="goHome()">⬅ Ana Menü</button>
+</div>
+
+<!-- GAME -->
+<div id="game" class="view">
+  <button class="game-close" onclick="askCloseGame()">✕</button>
+  <iframe id="frame"></iframe>
+</div>
+
+<!-- SETTINGS -->
+<div class="settings">
+  <button onclick="toggleSettings()">⚙️</button>
+</div>
+
+<div id="settingsPanel" class="settings-panel">
+  <label>
+    Devam Et
+    <input type="checkbox" id="continueToggle">
+  </label>
+
+  <label>
+    Tema
+    <select id="themeSelect">
+      <option value="dark">Dark</option>
+      <option value="light">Light</option>
+      <option value="green">Card Table Green</option>
+      <option value="purple">Casino Purple</option>
+      <option value="steel">Steel / Graphite</option>
+      <option value="red">Red Arena</option>
+      <option value="midnight">Midnight Blue</option>
+    </select>
+  </label>
+
+  <button class="btn gray" onclick="closeOpenGames()">Açık Oyunları Kapat</button>
+</div>
+
+</div>
+
+<script>
+const views=document.querySelectorAll('.view');
+const cont=document.getElementById("continue");
+const toggle=document.getElementById("continueToggle");
+const themeSelect=document.getElementById("themeSelect");
+
+function show(id){
+  views.forEach(v=>v.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+function openInfo(e, el){
+  e.stopPropagation();
+
+  const card = el.closest(".card");
+  const panel = card.querySelector(".info-panel");
+
+  document.getElementById("infoModalContent").innerHTML = panel.innerHTML;
+  document.getElementById("infoModal").classList.add("active");
+}
+
+function closeInfo(){
+  document.getElementById("infoModal").classList.remove("active");
+}
+
+
+function openGame(src,name){
+  localStorage.setItem("lastGame",JSON.stringify({src,name}));
+  frame.src = src;
+
+  show('game');
+  document.getElementById("game").classList.add("game-full");
+
+  renderContinue();
+}
+
+function openDart(){show('dart')}
+function goHome(){
+  frame.src="";
+  document.getElementById("game").classList.remove("game-full");
+  show('home');
+  renderContinue();
+}
+
+/* CONTINUE */
+function renderContinue(){
+  cont.innerHTML="";
+  if(localStorage.getItem("continueEnabled")!=="true") return;
+  const last=JSON.parse(localStorage.getItem("lastGame"));
+  if(!last) return;
+  cont.innerHTML=`
+    <div class="card" onclick="openGame('${last.src}','${last.name}')">
+      <h3><span class="icon">▶️</span> Devam Et</h3>
+      <span>${last.name}</span>
+      <button class="btn">Devam</button>
+    </div>`;
+}
+
+/* SETTINGS */
+function toggleSettings(){
+  document.getElementById("settingsPanel").classList.toggle("active");
+}
+toggle.checked = localStorage.getItem("continueEnabled")==="true";
+toggle.onchange = ()=>{
+  localStorage.setItem("continueEnabled",toggle.checked);
+  renderContinue();
+};
+
+/* THEME */
+const savedTheme = localStorage.getItem("theme") || "steel";
+document.body.className = "theme-" + savedTheme;
+themeSelect.value = savedTheme;
+themeSelect.onchange = ()=>{
+  localStorage.setItem("theme",themeSelect.value);
+  document.body.className = "theme-" + themeSelect.value;
+};
+
+function closeOpenGames(){
+  localStorage.removeItem("lastGame");
+  renderContinue();
+}
+renderContinue();
+
+function openRules(e, el){
+  e.stopPropagation();
+
+  const card = el.closest(".card");
+  const panel = card.querySelector(".rules-panel");
+
+  document.getElementById("infoModalContent").innerHTML = panel.innerHTML;
+  document.getElementById("infoModal").classList.add("active");
+}
+
+let pendingClose = false;
+
+function askCloseGame(){
+  const last = JSON.parse(localStorage.getItem("lastGame"));
+  document.getElementById("closeGameTitle").innerText =
+    last?.name || "Oyun";
+
+  document.getElementById("closeModal").classList.add("active");
+  pendingClose = true;
+}
+
+function closeCloseModal(){
+  document.getElementById("closeModal").classList.remove("active");
+  pendingClose = false;
+}
+
+function confirmCloseGame(){
+  closeCloseModal();
+  goHome();
+}
+
+</script>
+
+<div id="infoModal" class="info-modal" onclick="closeInfo()">
+  <div class="info-modal-card" onclick="event.stopPropagation()">
+    <button class="modal-close" onclick="closeInfo()">✕</button>
+    <div id="infoModalContent"></div>
+  </div>
+</div>
+
+<div class="app-version">v1.00</div>
+
+<div id="closeModal" class="info-modal">
+  <div class="info-modal-card">
+    <button class="modal-close" onclick="closeCloseModal()">✕</button>
+    <h3 id="closeGameTitle" style="margin-top:0"></h3>
+    <p style="color:var(--muted);margin-bottom:20px">
+      Oyunu kapatmak istiyor musun?
+    </p>
+
+    <div style="display:flex;gap:10px">
+      <button class="btn gray" onclick="closeCloseModal()">Vazgeç</button>
+      <button class="btn" onclick="confirmCloseGame()">Kapat</button>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
+
+
+
+
+</div>
+
+<template id="americano.html">
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AMERİCANO</title>
+
+<style>
+/* ================= THEME VARIABLES ================= */
+:root{
+  --bg:#f4f6f8;
+  --card:#ffffff;
+  --line:#cfd4dc;
+  --text:#111;
+  --blue:#2563eb;
+  --red:#dc2626;
+  --green:#16a34a;
+  --ara:#fff1d6;
+}
+
+/* THEMES */
+body.theme-dark{
+  --bg:#0f172a; --card:#1e293b; --line:#334155; --text:#e5e7eb; --ara:#3b2f1c;
+}
+body.theme-card-table-green{
+  --bg:#0b3d2e; --card:#14532d; --line:#166534; --text:#ecfdf5; --ara:#064e3b;
+}
+body.theme-casino-purple{
+  --bg:#1e1033; --card:#2e1065; --line:#6d28d9; --text:#f5f3ff; --ara:#4c1d95;
+}
+body.theme-steel-graphite{
+  --bg:#0f1720; --card:#1f2933; --line:#475569; --text:#e2e8f0; --ara:#111827;
+}
+body.theme-red-arena{
+  --bg:#2a0a0a; --card:#450a0a; --line:#7f1d1d; --text:#fee2e2; --ara:#7f1d1d;
+}
+body.theme-midnight-blue{
+  --bg:#020617; --card:#020617; --line:#1e3a8a; --text:#dbeafe; --ara:#020617;
+}
+
+/* ================= BASE ================= */
+body{
+  margin:0;
+  font-family:Segoe UI,Arial,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+
+h1{
+  text-align:center;
+  margin:12px 0 8px;
+  letter-spacing:3px;
+  font-size:24px;
+}
+
+.screen{padding:8px}
+.card{
+  background:var(--card);
+  border-radius:16px;
+  padding:14px;
+  box-shadow:0 10px 26px rgba(0,0,0,.18);
+}
+
+.center{text-align:center}
+
+button{
+  padding:8px 14px;
+  border:none;
+  border-radius:10px;
+  background:var(--blue);
+  color:white;
+  font-size:14px;
+  margin:4px;
+}
+button.gray{background:#6b7280}
+button.green{background:var(--green)}
+
+input{
+  width:100%;
+  box-sizing:border-box;
+  padding:6px;
+  font-size:14px;
+  border-radius:6px;
+  border:1px solid var(--line);
+  background:transparent;
+  color:var(--text);
+  text-align:center;
+}
+
+/* Masaüstü */
+@media (min-width: 769px){
+  table{
+    min-width: 700px;
+  }
+}
+
+/* Tablet */
+@media (max-width: 768px){
+  table{
+    min-width: 560px;
+  }
+}
+
+/* Telefon */
+@media (max-width: 480px){
+  table{
+    min-width: 420px;
+  }
+}
+
+th,td{
+  border:1px solid var(--line);
+  padding:4px;
+  text-align:center;
+  vertical-align: middle;
+}
+
+th.rule{
+  text-align:left;
+  padding-left:8px;
+  white-space:nowrap;
+}
+
+/* RULE STATES */
+.rule-black{color:var(--text)}
+.rule-blue{
+  color:var(--blue);
+  font-weight:600;
+  background:rgba(37,99,235,.10);
+  border-left:4px solid var(--blue);
+}
+.rule-red{
+  color:var(--red);
+  font-weight:600;
+  background:rgba(220,38,38,.12);
+}
+.rule-green{color:var(--green);font-weight:700}
+
+.arrow{margin-right:4px}
+.ara{
+  background:var(--ara);
+  font-weight:700;
+}
+
+/* POPUP */
+.popup{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.6);
+  backdrop-filter:blur(3px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:999;
+}
+.popupBox{
+  background:var(--card);
+  padding:18px;
+  border-radius:16px;
+  width:90%;
+  max-width:420px;
+}
+.hidden{display:none}
+/* MOBİL TABLO DÜZELTME */
+.tableWrap{
+  width:100%;
+  overflow-x:auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+table{
+  min-width: 680px; /* 4-5 oyuncu için ideal */
+}
+
+/* Tema butonu üstte kalsın */
+.themeBtn{
+  z-index: 2000;
+}
+
+/* Mobilde sol kural yazıları biraz küçülsün */
+@media (max-width: 480px){
+  th.rule{
+    font-size:11px;
+    padding-left:6px;
+  }
+}
+/* MOBİL TABLO DÜZELTME */
+.tableWrap{
+  width:100%;
+  overflow-x:auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+table{
+  min-width: 680px; /* 4-5 oyuncu için ideal */
+}
+
+/* Tema butonu üstte kalsın */
+.themeBtn{
+  z-index: 2000;
+}
+
+/* Mobilde sol kural yazıları biraz küçülsün */
+@media (max-width: 480px){
+  th.rule{
+    font-size:11px;
+    padding-left:6px;
+  }
+}
+@media (max-width: 480px){
+  .cell{
+    padding: 3px;
+    height: 30px;
+    font-size: 12px;
+  }
+}
+/* ===============================
+   MOBİL TAM DENGE AYARI
+   =============================== */
+
+/* TELEFON */
+@media (max-width: 480px){
+
+  /* Tablo genişliği – 2–3 oyuncu aynı anda */
+  table{
+    min-width: 360px;
+  }
+
+  /* Satırlar sık */
+  tr{
+    height: 30px;
+  }
+
+  th, td{
+    padding: 2px;
+  }
+
+  /* Puan girişleri */
+  .cell{
+    height: 24px;
+    padding: 2px;
+    font-size: 11px;
+    border-radius: 5px;
+  }
+
+  /* Sol kural kolonu */
+  th.rule{
+    font-size: 11px;
+    line-height: 1.1;
+    max-width: 80px;
+    white-space: normal;
+  }
+
+  /* Oyuncu başlıkları */
+  th{
+    font-size: 11px;
+  }
+}
+
+/* TELEFON YATAY */
+@media (max-width: 480px) and (orientation: landscape){
+
+  table{
+    min-width: 520px;
+  }
+
+  .cell{
+    height: 26px;
+    font-size: 12px;
+  }
+}
+/* === MOBİL DİKEY SON İNCE AYAR === */
+@media (max-width: 480px){
+
+  /* Satır yüksekliği son kırpma */
+  tr{
+    height: 28px;
+  }
+
+  th, td{
+    padding: 1px 2px;
+  }
+
+  /* Input kutuları */
+  .cell{
+    height: 22px;
+    padding: 1px;
+    font-size: 11px;
+    border-radius: 4px;
+  }
+
+  /* Ara toplam satırı ekstra incelsin */
+  .ara td{
+    padding: 1px;
+  }
+
+  /* Kural yazıları biraz daha sık */
+  th.rule{
+    font-size: 10.5px;
+    line-height: 1.05;
+  }
+}
+/* === MOBİL SAĞ KENAR SON DÜZELTME === */
+@media (max-width: 480px){
+
+  .tableWrap{
+    padding-right: 12px;   /* 👈 EN KRİTİK SATIR */
+  }
+
+  table{
+    margin-right: 8px;     /* iOS scroll güvenliği */
+  }
+
+}
+/* === iOS SON PİKSEL AYARI === */
+@media (max-width: 480px){
+
+  /* Kart iç boşluğu biraz daralt */
+  .card{
+    padding-right: 6px;
+    padding-left: 6px;
+  }
+
+  /* Scroll alanı tam aç */
+  .tableWrap{
+    margin-right: -6px;
+    padding-right: 16px;
+  }
+
+  /* Tabloyu çok az sola çek */
+  table{
+    margin-left: -2px;
+  }
+
+}
+/* === MOBIL MIKRO SCALE (FINAL) === */
+@media (max-width: 480px){
+  .tableWrap{
+    transform: scale(0.94);
+    transform-origin: top center;
+  }
+}
+
+/* === KAZANMA ŞANSI RENKLERİ === */
+.chance-green{
+  color: var(--green);
+  font-weight:600;
+}
+
+.chance-blue{
+  color: var(--blue);
+  font-weight:600;
+}
+
+.chance-yellow{
+  color:#eab308;
+  font-weight:600;
+}
+
+.chance-red{
+  color: var(--red);
+  font-weight:600;
+}
+
+.chance-purple{
+  color:#8b5cf6;
+  font-weight:600;
+}
+
+/* === KAZANMA ŞANSLARI BUTON PARLAMA === */
+.glow-btn{
+  animation: glowPulse 1.4s infinite;
+  box-shadow: 0 0 0 rgba(37,99,235,0.7);
+}
+
+@keyframes glowPulse{
+  0%{
+    box-shadow: 0 0 0 0 rgba(37,99,235,0.7);
+  }
+  70%{
+    box-shadow: 0 0 0 14px rgba(37,99,235,0);
+  }
+  100%{
+    box-shadow: 0 0 0 0 rgba(37,99,235,0);
+  }
+}
+
+#chanceHintPopup .popupBox{
+  max-width:320px;
+  text-align:center;
+}
+
+</style>
+</head>
+
+<body>
+<button onclick="toggleTheme()" style="position:fixed;top:8px;right:10px">🎨 Tema</button>
+<h1>AMERİCANO</h1>
+<div id="app"></div>
+
+<script>
+/* THEME SYNC */
+const THEMES=["light","dark","card-table-green","casino-purple","steel-graphite","red-arena","midnight-blue"];
+function applyTheme(t){
+  document.body.className="";
+  if(t!=="light") document.body.classList.add("theme-"+t);
+  localStorage.theme=t;
+}
+function toggleTheme(){
+  let cur=localStorage.theme||"light";
+  let i=(THEMES.indexOf(cur)+1)%THEMES.length;
+  applyTheme(THEMES[i]);
+}
+applyTheme(localStorage.theme||"light");
+
+/* ======== OYUN MANTIĞI (DEĞİŞMEDİ) ======== */
+/* ================= DATA ================= */
+const RULES=[
+"KÜT","SERİ","KÜT+ SERİ","2x 3 KÜT","2x 3 SERİ","4 KÜT","4 SERİ",
+"4 KÜT+ SERİ","2 x 4 KÜT","2 x 4 SERİ","5 SERİ","ÇİFT",
+"JOKER","ARA TOPLAM","KONKEN","TOPLAM"
+];
+
+const JOKER_POOL=[
+"KÜT","SERİ","KÜT+ SERİ","2x 3 KÜT","2x 3 SERİ","4 KÜT","4 SERİ",
+"4 KÜT+ SERİ","2 x 4 KÜT","2 x 4 SERİ","5 SERİ","ÇİFT","KONKEN"
+];
+
+const CEZA={"/":25,"X":50,"X/":75,"XX":100,"XX/":125,"XXX":150,"XXX/":175,"XXXX":200};
+
+let state={step:"count",count:0,players:[],active:0,joker:""};
+const app=document.getElementById("app");
+render();
+
+/* ================= RENDER ================= */
+function render(){
+  app.innerHTML="";
+  if(state.step==="count") countScreen();
+  if(state.step==="names") nameScreen();
+  if(state.step==="board") boardScreen();
+}
+
+function countScreen(){
+  app.innerHTML=`<div class="screen card center">
+    <h3>Oyuncu Sayısı</h3>
+    ${[2,3,4,5].map(n=>`<button onclick="setCount(${n})">${n}</button>`).join("")}
+  </div>`;
+}
+
+function setCount(n){
+  state={step:"names",count:n,players:[],active:0,joker:""};
+  render();
+}
+
+function nameScreen(){
+  app.innerHTML=`<div class="screen card">
+    <h3>Oyuncu İsimleri</h3>
+    ${Array.from({length:state.count}).map((_,i)=>`
+      <input id="p${i}" placeholder="Oyuncu ${i+1}"><br><br>`).join("")}
+    <div class="center"><button onclick="start()">Başla</button></div>
+  </div>`;
+}
+
+function formatName(n){
+  return n.toLowerCase().split(" ").filter(Boolean)
+    .map(w=>w[0].toUpperCase()+w.slice(1)).join(" ");
+}
+
+function start(){
+  state.players=[];
+  for(let i=0;i<state.count;i++){
+    state.players.push(formatName(document.getElementById("p"+i).value));
+  }
+  state.step="board";
+  render();
+}
+
+/* ================= BOARD ================= */
+function boardScreen(){
+  app.innerHTML=`<div class="screen card">
+    <div id="jokerInfo" class="rule-green"></div>
+    <div class="tableWrap">
+  <table id="board"></table>
+</div>
+    <div class="center" id="chanceWrap"></div>
+  </div>
+
+  <div id="jokerPopup" class="popup hidden">
+    <div class="popupBox">
+      <h3>🎲 Joker Eli</h3>
+      <button onclick="drawJoker()">Kura Çek</button>
+      <h4 id="jokerAnim"></h4>
+    </div>
+  </div>
+<div id="chanceHintPopup" class="popup hidden">
+  <div class="popupBox center">
+    <h3>ℹ️ Bilgi</h3>
+    <p style="margin-top:10px">
+      Lütfen <b>Kazanma Şansları</b>'nı<br>
+      alt kısımdan kontrol edin!
+    </p>
+  </div>
+</div>
+
+
+  <div id="chancePopup" class="popup hidden">
+    <div class="popupBox">
+      <h3>Kazanma Şansları</h3>
+      <div id="chanceText"></div>
+      <div class="center"><button class="gray" onclick="closeChance()">Geri</button></div>
+    </div>
+  </div>
+
+  <div id="winnerPopup" class="popup hidden">
+    <div class="popupBox">
+      <h3>🏆 Sonuç</h3>
+      <pre id="winnerText"></pre>
+      <div class="center">
+        <button class="green" onclick="restart()">Tekrar Oyna</button>
+        <button class="gray" onclick="render()">Yeni Oyun</button>
+      </div>
+    </div>
+  </div>`;
+  buildTable();
+}
+
+function buildTable(){
+  const t=document.getElementById("board");
+  t.innerHTML="";
+
+  let tr=document.createElement("tr");
+  let th=document.createElement("th");
+  th.innerHTML = `
+  <span style="color:var(--red); font-weight:700;">X</span>
+  <span style="color:var(--red); font-weight:700; margin-left:6px;">
+    Cezalar
+  </span>
+`;
+
+  th.className="rule rule-red";
+  tr.appendChild(th);
+  state.players.forEach(()=>{
+    let td=document.createElement("td");
+    td.onclick=()=>cyclePenalty(td);
+    tr.appendChild(td);
+  });
+  t.appendChild(tr);
+
+  tr=document.createElement("tr");
+  th=document.createElement("th");
+  th.textContent="Oyuncu";
+  tr.appendChild(th);
+  state.players.forEach(p=>{
+    let th2=document.createElement("th");
+    th2.textContent=p;
+    tr.appendChild(th2);
+  });
+  t.appendChild(tr);
+
+  RULES.forEach(r=>{
+    tr=document.createElement("tr");
+    th=document.createElement("th");
+    th.textContent=r;
+    th.className="rule rule-black";
+    tr.appendChild(th);
+    state.players.forEach(()=>{
+      let td=document.createElement("td");
+      let i=document.createElement("input");
+      i.className="cell";
+      i.onblur=update;
+      td.appendChild(i);
+      tr.appendChild(td);
+    });
+    if(r==="ARA TOPLAM") tr.classList.add("ara");
+    t.appendChild(tr);
+  });
+  update();
+}
+
+/* ================= LOGIC ================= */
+function cyclePenalty(td){
+  const seq=["","/","X","X/","XX","XX/","XXX","XXX/","XXXX"];
+  let i=seq.indexOf(td.textContent);
+  td.textContent=seq[(i+1)%seq.length];
+}
+
+function val(v){
+  v=v.toUpperCase();
+  if(v==="-"||v==="/")return -25;
+  if(v==="X")return -50;
+  if(v==="XX")return -100;
+  return parseInt(v)||0;
+}
+
+function update(){
+  const rows=document.getElementById("board").rows;
+
+  for(let i=0;i<RULES.length;i++){
+    const cell=rows[i+2].cells[0];
+    cell.className="rule rule-black";
+    cell.textContent=RULES[i];
+
+    let filled=true;
+    for(let c=1;c<rows[i+2].cells.length;c++){
+      if(rows[i+2].cells[c].querySelector("input")?.value==="") filled=false;
+    }
+
+    if(i<state.active){
+      cell.className="rule rule-red";
+    }else if(i===state.active){
+      cell.className=RULES[i]==="JOKER"?"rule rule-green":"rule rule-blue";
+      cell.innerHTML="➤ "+RULES[i];
+      if(filled){
+        state.active++;
+        calcAra();
+        if(RULES[i]==="ÇİFT"){
+          setTimeout(()=>document.getElementById("jokerPopup").classList.remove("hidden"),800);
+        }
+        if(RULES[i]==="JOKER"){
+  document.getElementById("chanceWrap").innerHTML =
+    `<button class="glow-btn" onclick="showChances()">Kazanma Şansları</button>`;
+
+  // 📳 Telefon titreşimi (varsa)
+  if(navigator.vibrate){
+    navigator.vibrate(150);
+  }
+
+  // 🔔 2 saniyelik bilgilendirme popup'ı
+  const hint = document.getElementById("chanceHintPopup");
+  hint.classList.remove("hidden");
+
+  setTimeout(()=>{
+    hint.classList.add("hidden");
+  },2000);
+}
+
+        update();
+        return;
+      }
+    }
+  }
+
+  if(RULES[state.active-1]==="KONKEN"){
+    setTimeout(showWinner,3000);
+  }
+}
+
+function calcAra(){
+  const rows=document.getElementById("board").rows;
+  const araRow=RULES.indexOf("ARA TOPLAM")+2;
+
+  for(let c=1;c<=state.players.length;c++){
+    let sum=CEZA[rows[0].cells[c].textContent]||0;
+    for(let r=2;r<araRow;r++){
+      sum+=val(rows[r].cells[c].querySelector("input").value);
+    }
+    rows[araRow].cells[c].textContent=sum;
+  }
+}
+
+/* ================= JOKER ================= */
+function drawJoker(){
+  let a=document.getElementById("jokerAnim");
+  let i=0;
+  let int=setInterval(()=>{
+    a.textContent=JOKER_POOL[Math.floor(Math.random()*JOKER_POOL.length)];
+    if(++i>18){
+      clearInterval(int);
+      state.joker=a.textContent;
+      document.getElementById("jokerInfo").textContent="Joker Eli: "+state.joker;
+      setTimeout(()=>document.getElementById("jokerPopup").classList.add("hidden"),2000);
+    }
+  },100);
+}
+
+/* ================= KAZANMA ŞANSLARI ================= */
+function showChances(){
+  const rows=document.getElementById("board").rows;
+  const araRow=RULES.indexOf("ARA TOPLAM")+2;
+
+  let arr=[];
+  for(let c=1;c<=state.players.length;c++){
+    arr.push({
+      name:state.players[c-1],
+      score:parseInt(rows[araRow].cells[c].textContent)||0
+    });
+  }
+
+  arr.sort((a,b)=>a.score-b.score);
+  let first=arr[0].score;
+  let html="";
+
+  arr.forEach((p,i)=>{
+    let diff=p.score-first;
+    let text="", cls="";
+
+if(i===0 || diff<=90){
+  text="Biterse kazanır";
+  cls="chance-green";
+}
+else if(diff<=125){
+  text="Biterse kazanamayabilir, Job denenebilir";
+  cls="chance-blue";
+}
+else if(diff<=200){
+  text="Job'la kazanır";
+  cls="chance-yellow";
+}
+else if(diff<=350){
+  text="Job yetmeyebilir";
+  cls="chance-purple";
+}
+else{
+  text="Boşver kanka sen";
+  cls="chance-red";
+}
+
+
+    html+=`
+  <p class="${cls}">
+    <b>${p.name}</b> ${i===0?"(Lider)":"– "+(i+1)+"."}<br>
+    ${i===0?"":"Fark: "+diff}<br>
+    ${text}
+  </p><hr>`;
+
+  });
+
+  document.getElementById("chanceText").innerHTML=html;
+  document.getElementById("chancePopup").classList.remove("hidden");
+}
+
+function closeChance(){
+  document.getElementById("chancePopup").classList.add("hidden");
+}
+
+/* ================= WINNER ================= */
+function showWinner(){
+  const rows=document.getElementById("board").rows;
+  let res=[];
+  for(let c=1;c<=state.players.length;c++){
+    let total=parseInt(rows[RULES.indexOf("ARA TOPLAM")+2].cells[c].textContent)||0;
+    total+=val(rows[RULES.indexOf("KONKEN")+2].cells[c].querySelector("input").value);
+    res.push({name:state.players[c-1],score:total});
+  }
+  res.sort((a,b)=>a.score-b.score);
+  document.getElementById("winnerText").textContent=
+    res.map((p,i)=>`${i===0?"🏆":i+1+"."} ${p.name} – ${p.score}`).join("\n");
+  document.getElementById("winnerPopup").classList.remove("hidden");
+}
+
+function restart(){
+  state.active=0;
+  state.joker="";
+  render();
+}
+</script>
+</body>
+</html>
+
+</template>
+<template id="kura-cek.html">
+<!DOCTYPE html>
+<html lang="tr" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kura Uygulaması</title>
+
+<style>
+/* ================= THEME ================= */
+:root{
+--bg:#0b1220;--panel:#111827;--soft:#020617;
+--text:#e5e7eb;--accent:#22c55e;--lose:#ef4444;--border:#1f2937;
+}
+:root[data-theme="light"]{
+--bg:#f3f4f6;--panel:#ffffff;--soft:#e5e7eb;
+--text:#111827;--accent:#16a34a;--lose:#dc2626;--border:#d1d5db;
+}
+:root[data-theme="casino"]{
+--bg:#064e3b;--panel:#022c22;--soft:#064e3b;
+--text:#ecfdf5;--accent:#facc15;--lose:#f87171;--border:#065f46;
+}
+
+/* ================= BASE ================= */
+*{box-sizing:border-box;font-family:-apple-system}
+body{margin:0;background:var(--bg);color:var(--text)}
+.app{max-width:900px;margin:auto;padding:12px;padding-bottom:80px}
+h1{text-align:center}
+
+/* ================= UI ================= */
+.card{
+background:var(--panel);
+border-radius:16px;
+padding:16px;
+margin-bottom:14px;
+animation:fade .25s ease
+}
+button{
+width:100%;
+padding:14px;
+font-size:18px;
+border:none;
+border-radius:14px;
+background:var(--accent);
+color:#000;
+margin-top:10px;
+cursor:pointer
+}
+.btn-row{display:flex;gap:10px}
+.btn-row button{flex:1}
+
+input{
+width:100%;
+padding:14px;
+font-size:22px;
+border-radius:14px;
+border:none;
+margin-top:6px
+}
+
+/* ================= MENU ================= */
+.menu-desc{
+font-size:13px;
+opacity:.7;
+margin-top:4px;
+text-align:center
+}
+
+/* ================= MATCH ================= */
+.match{
+background:var(--soft);
+padding:12px;
+border-radius:14px;
+margin-top:10px;
+border:1px solid var(--border)
+}
+.teams{
+display:flex;
+align-items:center;
+justify-content:space-between
+}
+.team{
+flex:1;
+text-align:center;
+padding:10px;
+border-radius:12px;
+font-weight:600;
+cursor:pointer;
+transition:.25s
+}
+.team.lose{
+text-decoration:line-through;
+color:var(--lose);
+opacity:.45
+}
+.vs{opacity:.6}
+
+/* ================= OVERLAY ================= */
+.overlay{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.75);
+backdrop-filter:blur(6px);
+display:flex;
+align-items:center;
+justify-content:center;
+z-index:99
+}
+.overlay-box{
+background:var(--panel);
+padding:22px;
+border-radius:20px;
+width:90%;
+max-width:380px;
+animation:scale .25s ease
+}
+
+/* ================= WINNER ================= */
+.winner{
+text-align:center;
+font-size:28px
+}
+.winner span{
+font-size:64px;
+display:block;
+margin-bottom:6px;
+animation:pulse 1.3s infinite;
+filter:drop-shadow(0 0 12px var(--accent))
+}
+
+/* ================= ANIM ================= */
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes scale{from{transform:scale(.9);opacity:0}to{transform:scale(1);opacity:1}}
+@keyframes pulse{
+0%{transform:scale(1)}
+50%{transform:scale(1.1)}
+100%{transform:scale(1)}
+}
+@keyframes drop{
+from{opacity:0;transform:translateY(-6px)}
+to{opacity:1;transform:translateY(0)}
+}
+
+/* ===== TABLET ===== */
+@media (max-width: 1024px) {
+
+  .app{
+    max-width:95%;
+  }
+
+  button{
+    font-size:17px;
+    padding:12px;
+  }
+
+  input{
+    font-size:18px;
+    padding:12px;
+  }
+
+}
+
+/* ===== MOBİL ===== */
+@media (max-width: 600px) {
+
+  h1{
+    font-size:22px;
+  }
+
+  button{
+    font-size:16px;
+    padding:11px;
+  }
+
+  input{
+    font-size:16px;
+    padding:11px;
+  }
+
+  .match{
+    padding:10px;
+  }
+
+  .teams{
+    flex-direction:column;
+    gap:6px;
+  }
+
+  .vs{
+    font-size:14px;
+  }
+
+}
+
+/* ===== ÇOK KÜÇÜK EKRAN ===== */
+@media (max-width: 400px){
+
+  button{
+    font-size:14px;
+    padding:9px;
+  }
+
+  input{
+    font-size:14px;
+  }
+
+}
+
+.team:active{
+  transform:scale(.95);
+}
+
+
+</style>
+</head>
+
+<body>
+<div class="app">
+<h1>KURA UYGULAMASI</h1>
+<div id="screen"></div>
+</div>
+
+<!-- ================= OVERLAY ================= -->
+<div id="overlay" class="overlay" style="display:none">
+  <div class="overlay-box">
+    <p style="text-align:center;margin-bottom:10px">Bu maçı kim kazandı?</p>
+    <div id="overlayBtns" class="btn-row"></div>
+    <button onclick="closeOverlay()" style="margin-top:14px;background:#374151;color:#fff">İptal</button>
+  </div>
+</div>
+
+<!-- ================= BOTTOM BAR ================= -->
+<div class="bottom-bar">
+  <button onclick="home()">Ana Sayfa</button>
+</div>
+
+<script>
+/* ===== THEME AUTO ===== */
+(function(){
+let p=window.parent?.document?.documentElement?.getAttribute("data-theme");
+if(p) document.documentElement.setAttribute("data-theme",p);
+})();
+
+/* ===== UTIL ===== */
+function cap(str){
+  return str
+    .toLowerCase()
+    .split(" ")
+    .map(w => w.charAt(0).toUpperCase() + w.slice(1))
+    .join(" ");
+}
+const shuffle=a=>a.sort(()=>Math.random()-.5);
+const screen=document.getElementById("screen");
+
+/* ===== STATE ===== */
+let mode="home";
+
+/* ================= HOME ================= */
+function home(){
+mode="home";
+screen.innerHTML=`
+<div class="card">
+<button onclick="draw()">🎲 Çekiliş Yap</button>
+<div class="menu-desc">Rastgele kazanan seç</div>
+<button onclick="group()">👥 Grup Kurası</button>
+<div class="menu-desc">Dengeli gruplar oluştur</div>
+<button onclick="tournament()">🏆 Turnuva</button>
+<div class="menu-desc">Gerçek turnuva sistemi</div>
+</div>`;
+}
+home();
+
+/* =====================================================
+   1️⃣ ÇEKİLİŞ
+===================================================== */
+let drawNames=[],drawWinnerCount=1;
+function draw(){
+mode="draw";
+screen.innerHTML=`
+<div class="card">
+<p>Katılımcı Sayısı</p>
+<input id="dc" type="number" min="1"
+placeholder="Katılımcı Sayısı Girin...">
+<button onclick="drawNamesInput()">Devam</button>
+</div>`;
+}
+function drawNamesInput(){
+let c=+dc.value;
+screen.innerHTML=`<div class="card"><p>İsimler</p>`;
+for(let i=0;i<c;i++)
+  screen.innerHTML+=`<input class="dn" placeholder="Katılımcı ${i+1}">`;
+screen.innerHTML+=`
+<p>Kazanan Sayısı</p>
+<input id="dw" type="number" min="1"
+placeholder="Kazanacak Kişi Sayısı Girin...">
+<button onclick="drawResult()">Çekilişi Yap</button>
+</div>`;
+}
+function drawResult(){
+if(drawNames.length===0){
+drawNames=[...document.querySelectorAll(".dn")].map(i=>cap(i.value.trim())).filter(Boolean);
+drawWinnerCount=Math.min(drawNames.length,+dw.value);
+}
+let pool=[...drawNames];shuffle(pool);
+let win=pool.slice(0,drawWinnerCount);
+screen.innerHTML=`
+<div class="card">
+<div class="winner"><span>🎉</span>${win.join("<br>")}</div>
+<div class="btn-row">
+<button onclick="drawResult()">Tekrar Kura</button>
+<button onclick="draw();drawNames=[]">Yeni Çekiliş</button>
+</div>
+</div>`;
+}
+
+/* =====================================================
+   2️⃣ GRUP
+===================================================== */
+let groupNames=[],groupCount=2;
+function group(){
+mode="group";
+screen.innerHTML=`
+<div class="card">
+<p>Kişi Sayısı</p>
+<input id="gc" type="number" min="2"
+placeholder="Kişi Sayısı Girin...">
+<button onclick="groupNamesInput()">Devam</button>
+</div>`;
+}
+function groupNamesInput(){
+let c=+gc.value;
+screen.innerHTML=`<div class="card"><p>İsimler</p>`;
+for(let i=0;i<c;i++)
+  screen.innerHTML+=`<input class="gn" placeholder="Oyuncu ${i+1}">`;
+screen.innerHTML+=`
+<p>Grup Sayısı</p>
+<input id="gg" type="number" min="1"
+placeholder="Grup Sayısı Girin...">
+<button onclick="groupResult()">Grupları Oluştur</button>
+</div>`;
+}
+function groupResult(){
+if(groupNames.length===0){
+groupNames=[...document.querySelectorAll(".gn")].map(i=>cap(i.value.trim())).filter(Boolean);
+groupCount=Math.min(groupNames.length,+gg.value);
+}
+shuffle(groupNames);
+let groups=[...Array(groupCount)].map(()=>[]);
+groupNames.forEach((n,i)=>groups[i%groupCount].push(n));
+screen.innerHTML=`<div class="card">`;
+groups.forEach((g,i)=>{
+screen.innerHTML+=`
+<div class="match" style="animation:drop .25s ease">
+<strong>Grup ${i+1}</strong><br>${g.join("<br>")}
+</div>`;
+});
+screen.innerHTML+=`
+<div class="btn-row">
+<button onclick="groupResult()">Tekrar Kura</button>
+<button onclick="group();groupNames=[]">Yeni Kura</button>
+</div></div>`;
+}
+
+/* =====================================================
+   3️⃣ TURNUVA (MANTIK AYNI)
+===================================================== */
+let basePlayers=[],teamCount=0;
+let teams=[],rounds=[],currentRound=0,winnersBuffer=[];
+
+function tournament(){
+mode="tournament";
+screen.innerHTML=`
+<div class="card">
+<p>Oyuncu Sayısı</p>
+<input id="pc" type="number" min="2"
+placeholder="Oyuncu Sayısı Girin...">
+<button onclick="askTeam()">Devam</button>
+</div>`;
+}
+
+function askTeam(){
+const pcVal=+pc.value;
+screen.innerHTML=`
+<div class="card">
+<p>Takım Sayısı</p>
+<input id="tc" type="number" min="2"
+placeholder="Takım Sayısı Girin...">
+<button onclick="askPlayers(${pcVal})">Devam</button>
+</div>`;
+}
+
+function askPlayers(count){
+teamCount=+tc.value;
+screen.innerHTML=`<div class="card"><p>Oyuncular</p>`;
+for(let i=0;i<count;i++)
+  screen.innerHTML+=`<input class="pn" placeholder="Oyuncu ${i+1}">`;
+screen.innerHTML+=`
+<button onclick="savePlayers()">Takımları Oluştur</button>
+</div>`;
+}
+
+function savePlayers(){
+basePlayers=[...document.querySelectorAll(".pn")].map(i=>cap(i.value.trim())).filter(Boolean);
+createTeams();
+}
+
+function createTeams(){
+let pool=[...basePlayers];
+shuffle(pool);
+teams=[...Array(teamCount)].map(()=>[]);
+pool.forEach((p,i)=>teams[i%teamCount].push(p));
+teams=teams.map(t=>t.join(" - "));
+showPreview();
+}
+
+function showPreview(){
+shuffle(teams);
+screen.innerHTML=`<div class="card"><p>Kura Sonucu</p>`;
+teams.forEach((t,i)=>{
+if(i%2===0 && teams[i+1]){
+screen.innerHTML+=`
+<div class="match" style="animation:drop .25s ease ${i*120}ms">
+<div class="teams">
+<div class="team">${teams[i]}</div>
+<div class="vs">VS</div>
+<div class="team">${teams[i+1]}</div>
+</div>
+</div>`;
+}
+});
+screen.innerHTML+=`
+<div class="btn-row">
+<button onclick="createTeams()">Tekrar Kura</button>
+<button onclick="startTournament()">Turnuvayı Başlat</button>
+</div></div>`;
+}
+
+function startTournament(){
+rounds=[[...teams.map(t=>({name:t,eliminated:false}))]];
+currentRound=0;
+winnersBuffer=[];
+renderTournament();
+}
+
+function renderTournament(){
+screen.innerHTML="";
+rounds.forEach((round,ri)=>{
+screen.innerHTML+=`<div class="card"><strong>${ri+1}. Tur</strong>`;
+for(let i=0;i<round.length;i+=2){
+if(!round[i+1]) continue;
+screen.innerHTML+=`
+<div class="match">
+<div class="teams">
+<div class="team ${round[i].eliminated?'lose':''}" onclick="openOverlay(${ri},${i})">${round[i].name}</div>
+<div class="vs">VS</div>
+<div class="team ${round[i+1].eliminated?'lose':''}" onclick="openOverlay(${ri},${i+1})">${round[i+1].name}</div>
+</div>
+</div>`;
+}
+screen.innerHTML+=`</div>`;
+});
+}
+
+/* ===== OVERLAY ===== */
+function openOverlay(ri,ti){
+if(ri!==currentRound) return;
+const r=rounds[ri];
+const m=ti%2===0?ti:ti-1;
+overlayBtns.innerHTML=`
+<button onclick="pickWinner(${ri},${m})">${r[m].name}</button>
+<button onclick="pickWinner(${ri},${m+1})">${r[m+1].name}</button>`;
+overlay.style.display="flex";
+}
+function closeOverlay(){overlay.style.display="none"}
+
+function pickWinner(ri,ti){
+closeOverlay();
+let round=rounds[ri];
+let m=ti%2===0?ti:ti-1;
+let a=round[m],b=round[m+1];
+if(a.eliminated||b.eliminated) return;
+
+let winner=ti===m?a:b;
+let loser=ti===m?b:a;
+loser.eliminated=true;
+winnersBuffer.push({name:winner.name,eliminated:false});
+
+let done=true;
+for(let i=0;i<round.length;i+=2){
+if(!round[i].eliminated && !round[i+1].eliminated){done=false;break;}
+}
+
+if(done){
+if(winnersBuffer.length===1){
+screen.innerHTML=`
+<div class="card">
+<div class="winner"><span>🏆</span>${winnersBuffer[0].name}</div>
+<div class="btn-row">
+<button onclick="createTeams()">Aynı Oyuncular</button>
+<button onclick="tournament()">Yeni Oyuncular</button>
+</div></div>`;
+return;
+}
+rounds.push(winnersBuffer);
+currentRound++;
+winnersBuffer=[];
+}
+renderTournament();
+}
+</script>
+</body>
+</html>
+
+</template>
+<template id="lig.html">
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lig Modu</title>
+
+<style>
+:root{
+--bg:#0b1220;--panel:#111827;--soft:#020617;
+--text:#e5e7eb;--accent:#22c55e;--lose:#ef4444;--border:#1f2937;
+}
+*{box-sizing:border-box;font-family:-apple-system}
+body{margin:0;background:var(--bg);color:var(--text)}
+.app{max-width:900px;margin:auto;padding:12px}
+h1{text-align:center}
+.card{background:var(--panel);border-radius:16px;padding:14px;margin-bottom:12px}
+button{width:100%;padding:14px;font-size:18px;border:none;border-radius:14px;background:var(--accent);color:#000;margin-top:10px;cursor:pointer}
+.btn-row{display:flex;gap:10px}
+.btn-row button{flex:1}
+input{width:100%;padding:14px;font-size:20px;border-radius:14px;border:none;margin-top:6px}
+
+.match{background:var(--soft);padding:12px;border-radius:14px;margin-top:8px;border:1px solid var(--border);transition:.25s}
+.match.done{opacity:.45}
+.teams{display:flex;align-items:center;justify-content:space-between}
+.team{flex:1;text-align:center;font-weight:600}
+.team.click{cursor:pointer}
+.team.win::after{content:" ✔";color:var(--accent)}
+.team.lose{text-decoration:line-through;color:var(--lose);opacity:.6}
+.vs{opacity:.6}
+
+/* standings */
+.standings{margin-top:10px;display:flex;flex-direction:column;gap:8px}
+.standing-row{background:var(--soft);border:1px solid var(--border);border-radius:12px;padding:10px 12px;display:flex;align-items:center;justify-content:space-between}
+.standing-left{display:flex;align-items:center;gap:10px}
+.standing-rank{width:22px;text-align:center;opacity:.6}
+.standing-team{font-weight:600}
+.standing-meta{font-size:12px;opacity:.65}
+.standing-points{
+  font-size:26px;
+  font-weight:900;
+  color:var(--accent);
+  min-width:36px;
+  text-align:right;
+}
+
+/* overlay */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);display:flex;align-items:center;justify-content:center}
+.overlay-box{background:var(--panel);padding:20px;border-radius:18px;width:90%;max-width:360px}
+.radio{display:flex;gap:10px;margin-top:10px}
+.radio label{flex:1;background:#020617;padding:10px;border-radius:12px;text-align:center;cursor:pointer}
+.radio input{display:none}
+.radio input:checked+label{background:var(--accent);color:#000}
+/* SEGMENTED MODE SELECT */
+.mode-switch{
+  display:flex;
+  background:var(--soft);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:6px;
+  gap:6px;
+  margin-top:12px;
+}
+
+.mode-switch input{
+  display:none;
+}
+
+.mode-option{
+  flex:1;
+  padding:10px 12px;
+  border-radius:12px;
+  text-align:center;
+  cursor:pointer;
+  font-size:16px;
+  color:var(--text);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  transition:.2s;
+}
+
+.mode-option .check{
+  opacity:0;
+  font-size:14px;
+}
+
+.mode-switch input:checked + .mode-option{
+  background:#020617;
+  border:1px solid var(--accent);
+  color:var(--accent);
+}
+
+.mode-switch input:checked + .mode-option .check{
+  opacity:1;
+}
+
+.standing-row:nth-child(1){
+  border-color:#facc15;
+}
+.standing-row:nth-child(2){
+  border-color:#9ca3af;
+}
+.standing-row:nth-child(3){
+  border-color:#d97706;
+}
+
+/* === LIG TABLO GORUNUMU === */
+.standings{
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+}
+
+.standing-header,
+.standing-row{
+  display:grid;
+  grid-template-columns:
+    28px      /* sıra */
+    1.8fr     /* takım */
+    40px      /* O */
+    40px      /* G */
+    40px      /* M */
+    70px      /* Set */
+    50px;     /* Puan */
+  align-items:center;
+  padding:10px 12px;
+}
+
+.standing-header{
+  font-size:13px;
+  font-weight:700;
+  opacity:.75;
+  border-bottom:1px solid var(--border);
+}
+
+.standing-row{
+  background:var(--soft);
+  border-radius:10px;
+}
+
+.standing-row:nth-child(even){
+  background:#020617;
+}
+
+.standing-rank{
+  text-align:center;
+  opacity:.6;
+}
+
+.standing-team{
+  font-weight:600;
+
+  /* iki satıra izin ver */
+  white-space: normal;
+  overflow: hidden;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2;        /* maksimum 2 satır */
+  -webkit-box-orient: vertical;
+
+  line-height: 1.2;
+}
+
+.standing-set{
+  font-variant-numeric:tabular-nums;
+}
+
+.standing-points{
+  font-size:20px;
+  font-weight:900;
+  color:var(--accent);
+  text-align:right;
+}
+
+/* === LIG TABLO MOBILE FIX === */
+@media (max-width: 600px) {
+
+  .standing-header,
+  .standing-row{
+    grid-template-columns:
+      22px     /* # */
+      1.4fr      /* takım */
+      30px     /* O */
+      30px     /* G */
+      30px     /* M */
+      52px     /* Set */
+      36px;    /* P */
+  }
+}
+
+@media (max-width:600px){
+  .standing-points{
+    text-align:center;
+  }
+}
+
+/* ===== TABLET ===== */
+@media (max-width: 1024px) {
+
+  .app{
+    max-width:95%;
+  }
+
+  button{
+    font-size:17px;
+    padding:12px;
+  }
+
+  input{
+    font-size:18px;
+    padding:12px;
+  }
+
+}
+
+/* ===== MOBİL ===== */
+@media (max-width: 600px) {
+
+  h1{
+    font-size:22px;
+  }
+
+  button{
+    font-size:16px;
+    padding:11px;
+  }
+
+  input{
+    font-size:16px;
+    padding:11px;
+  }
+
+  .match{
+    padding:10px;
+  }
+
+  .teams{
+    flex-direction:column;
+    gap:6px;
+  }
+
+  .vs{
+    font-size:14px;
+  }
+
+}
+
+/* ===== ÇOK KÜÇÜK EKRAN ===== */
+@media (max-width: 400px){
+
+  button{
+    font-size:14px;
+    padding:9px;
+  }
+
+  input{
+    font-size:14px;
+  }
+
+}
+
+.match{
+  transition:transform .2s ease;
+}
+
+.match:hover{
+  transform:translateY(-2px);
+}
+
+
+</style>
+</head>
+
+<body>
+<div class="app">
+<h1>LİG MODU</h1>
+<div id="screen"></div>
+</div>
+
+<div id="overlay" class="overlay" style="display:none">
+  <div class="overlay-box">
+    <p style="text-align:center">Bu maçı kim kazandı?</p>
+    <div id="overlayBtns" class="btn-row"></div>
+    <button onclick="closeOverlay()" style="background:#374151;color:#fff">İptal</button>
+  </div>
+</div>
+
+<script>
+/* UTIL */
+function cap(str){
+  return str
+    .toLowerCase()
+    .split(" ")
+    .map(w => w.charAt(0).toUpperCase() + w.slice(1))
+    .join(" ");
+}
+const shuffle=a=>a.sort(()=>Math.random()-.5);
+const screen=document.getElementById("screen");
+
+/* STATE */
+let playerCount=0,teamCount=0;
+let players=[],teams=[];
+let rounds=[],currentRound=0;
+let stats={},playedMatches=0,results={};
+let doubleRound=false;
+let fromChampion=false;
+
+/* START */
+renderPlayerCount();
+
+function renderPlayerCount(){
+screen.innerHTML=`
+<div class="card">
+<p>Oyuncu Sayısı</p>
+<input id="pc" type="number" min="2"
+placeholder="Oyuncu Sayısı Girin...">
+<button onclick="savePlayerCount()">Devam</button>
+</div>`;
+}
+function savePlayerCount(){
+playerCount=+pc.value;if(playerCount<2)return;
+renderTeamCount();
+}
+function renderTeamCount(){
+screen.innerHTML=`
+<div class="card">
+<p>Takım Sayısı</p>
+<input id="tc" type="number" min="2"
+placeholder="Takım Sayısı Girin...">
+<button onclick="saveTeamCount()">Devam</button>
+</div>`;
+}
+function saveTeamCount(){
+teamCount=+tc.value;if(teamCount<2)return;
+renderPlayersInput();
+}
+function renderPlayersInput(){
+screen.innerHTML=`<div class="card"><p>Oyuncular</p>`;
+for(let i=0;i<playerCount;i++){
+  screen.innerHTML+=`
+    <input 
+      class="pn" 
+      type="text"
+      placeholder="Oyuncu ${i + 1}"
+    >
+  `;
+}
+screen.innerHTML+=`<button onclick="createTeams()">Takımları Oluştur</button></div>`;
+}
+
+/* TEAMS */
+function createTeams(){
+players=[...document.querySelectorAll(".pn")].map(i=>cap(i.value.trim())).filter(Boolean);
+shuffle(players);buildTeams();
+}
+function reshuffleTeams(){shuffle(players);buildTeams();}
+function buildTeams(){
+teams=[...Array(teamCount)].map(()=>[]);
+players.forEach((p,i)=>teams[i%teamCount].push(p));
+teams=teams.map(t=>t.join(" - "));
+renderTeamsPreview();
+}
+function renderTeamsPreview(){
+screen.innerHTML=`<div class="card"><b>Takımlar</b>`;
+teams.forEach(t=>screen.innerHTML+=`<div class="match">${t}</div>`);
+screen.innerHTML+=`
+<div class="mode-switch">
+  <input 
+    type="radio" 
+    id="single" 
+    name="mode" 
+    checked 
+    onchange="doubleRound=false"
+  >
+  <label for="single" class="mode-option">
+    <span class="check">✔</span>
+    Tek Karşılaşma
+  </label>
+
+  <input 
+    type="radio" 
+    id="double" 
+    name="mode" 
+    onchange="doubleRound=true"
+  >
+  <label for="double" class="mode-option">
+    <span class="check">✔</span>
+    Çift Karşılaşma
+  </label>
+</div>
+
+<div class="btn-row">
+<button onclick="reshuffleTeams()">Tekrar Kura</button>
+<button onclick="startLeague()">Ligi Başlat</button>
+</div></div>`;
+}
+
+/* LEAGUE */
+function startLeague(){
+stats={};results={};
+teams.forEach(t=>stats[t]={o:0,g:0,m:0,p:0,sk:0,sy:0});
+rounds=createRoundRobin([...teams]);
+if(doubleRound){
+let second=rounds.map(r=>r.map(m=>m.includes("BAY")?m:[m[1],m[0]]));
+rounds=[...rounds,...second];
+}
+currentRound=0;playedMatches=0;
+renderLeague();
+}
+function createRoundRobin(list){
+let arr=[...list];
+if(arr.length%2!==0)arr.push("BAY");
+let res=[];
+for(let r=0;r<arr.length-1;r++){
+let m=[];
+for(let i=0;i<arr.length/2;i++)m.push([arr[i],arr[arr.length-1-i]]);
+res.push(m);arr.splice(1,0,arr.pop());
+}
+return res;
+}
+
+/* RENDER */
+function renderLeague(){
+fromChampion=false;
+screen.innerHTML=`<div class="card"><b>Fikstür</b></div>`;
+rounds.forEach((round,ri)=>{
+screen.innerHTML+=`<div class="card"><b>${ri+1}. Tur</b>`;
+round.forEach((m,mi)=>{
+if(m.includes("BAY")){
+screen.innerHTML+=`<div class="match">${m.find(x=>x!=="BAY")} (BAY)</div>`;
+}else{
+let active=ri===currentRound;
+let key=`${ri}-${mi}`,res=results[key];
+screen.innerHTML+=`
+<div class="match ${res?'done':''}">
+<div class="teams">
+<div class="team ${res?.win===m[0]?'win':res?.lose===m[0]?'lose':''} ${active&&!res?'click':''}"
+onclick="${active&&!res?`openOverlay(${mi})`:''}">${m[0]}</div>
+<div class="vs">
+  ${res ? res.score : "VS"}
+</div>
+<div class="team ${res?.win===m[1]?'win':res?.lose===m[1]?'lose':''} ${active&&!res?'click':''}"
+onclick="${active&&!res?`openOverlay(${mi})`:''}">${m[1]}</div>
+</div>
+</div>`;
+}
+});
+screen.innerHTML+=`</div>`;
+});
+screen.innerHTML+=`<button onclick="renderTable(false)">Puan Durumu</button>`;
+}
+
+/* OVERLAY */
+function openOverlay(mi){
+let m=rounds[currentRound][mi];
+overlayBtns.innerHTML=`
+<div style="display:flex;flex-direction:column;gap:10px">
+  <button onclick="pickWinner('${m[0]}','${m[1]}',${mi},1)">
+    ${m[0]} (1 Fark)
+  </button>
+  <button onclick="pickWinner('${m[0]}','${m[1]}',${mi},2)">
+    ${m[0]} (2 Fark)
+  </button>
+
+  <button onclick="pickWinner('${m[1]}','${m[0]}',${mi},1)">
+    ${m[1]} (1 Fark)
+  </button>
+  <button onclick="pickWinner('${m[1]}','${m[0]}',${mi},2)">
+    ${m[1]} (2 Fark)
+  </button>
+</div>
+`;
+overlay.style.display="flex";
+}
+function closeOverlay(){overlay.style.display="none"}
+
+/* RESULT */
+function pickWinner(win,lose,mi,diff){
+closeOverlay();
+let key=`${currentRound}-${mi}`;if(results[key])return;
+let score =
+  diff===1
+    ? (win===rounds[currentRound][mi][0] ? "2-1" : "1-2")
+    : (win===rounds[currentRound][mi][0] ? "2-0" : "0-2");
+
+results[key]={win,lose,score};
+
+stats[win].g++;
+stats[lose].m++;
+
+stats[win].o++;
+stats[lose].o++;
+
+/* PUAN */
+if(diff===1){
+  stats[win].p+=2;
+  stats[lose].p+=1;
+  stats[win].sk+=2; stats[win].sy+=1;
+  stats[lose].sk+=1; stats[lose].sy+=2;
+}else{
+  stats[win].p+=3;
+  stats[lose].p+=0;
+  stats[win].sk+=2; stats[win].sy+=0;
+  stats[lose].sk+=0; stats[lose].sy+=2;
+}
+playedMatches++;
+let total=rounds[currentRound].filter(m=>!m.includes("BAY")).length;
+if(playedMatches===total){
+rounds[currentRound].forEach(m=>{if(m.includes("BAY"))stats[m.find(x=>x!=="BAY")].p+=1;});
+currentRound++;playedMatches=0;
+if(currentRound>=rounds.length){renderChampion();return;}
+}
+renderLeague();
+}
+
+function renderTable(fromEnd){
+fromChampion=fromEnd;
+let sorted=Object.entries(stats).sort((a,b)=>b[1].p-a[1].p);
+
+screen.innerHTML=`
+<div class="card">
+<b>Puan Durumu</b>
+
+<div class="standings">
+
+  <div class="standing-header">
+    <div>#</div>
+    <div>Takım</div>
+    <div>O</div>
+    <div>G</div>
+    <div>M</div>
+    <div>Set</div>
+    <div>P</div>
+  </div>
+
+  ${sorted.map(([t,s],i)=>`
+    <div class="standing-row">
+      <div class="standing-rank">${i+1}</div>
+      <div class="standing-team">${t}</div>
+      <div>${s.o}</div>
+      <div>${s.g}</div>
+      <div>${s.m}</div>
+      <div class="standing-set">${s.sk}-${s.sy}</div>
+      <div class="standing-points">${s.p}</div>
+    </div>
+  `).join("")}
+
+</div>
+
+<button onclick="${fromChampion?'renderChampion()':'renderLeague()'}">Geri</button>
+</div>`;
+}
+
+
+/* END */
+function renderChampion(){
+screen.innerHTML=`
+<div class="card">
+<h2>🏆 Şampiyon</h2>
+<div class="standing-points">${Object.entries(stats).sort((a,b)=>b[1].p-a[1].p)[0][0]}</div>
+<button onclick="renderTable(true)">Puan Durumu</button>
+<button onclick="location.reload()">Yeni Lig</button>
+</div>`;
+}
+</script>
+</body>
+</html>
+
+</template>
+<template id="somali.html">
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Somali Okey</title>
+
+<style>
+*{box-sizing:border-box;font-family:system-ui}
+body{margin:0;background:#0f172a;color:#e5e7eb}
+.screen{display:none;min-height:100vh;padding:16px}
+.screen.active{display:block}
+h1,h2{text-align:center;margin:12px 0}
+.topbar{display:flex;justify-content:space-between;align-items:center}
+.money{font-weight:700}
+.card{background:#020617;border-radius:18px;padding:16px;margin-bottom:14px}
+input{width:100%;padding:14px;font-size:18px;border-radius:12px;border:none;margin-bottom:10px}
+button{width:100%;padding:14px;font-size:17px;font-weight:700;border-radius:14px;border:none;background:#22c55e;margin-bottom:8px}
+.secondary{background:#334155;color:#fff}
+.danger{background:#ef4444;color:#fff}
+.team{display:flex;justify-content:space-between;align-items:center;padding:12px;border:1px solid #334155;border-radius:14px;margin-bottom:10px}
+.tags span{margin-left:6px;font-weight:900}
+.D{color:#22c55e}.O{color:#ef4444}.G{color:#a855f7}
+.green{color:#22c55e}.red{color:#ef4444}
+hr{border:0;border-top:1px solid #334155;margin:12px 0}
+.small{font-size:14px}
+
+@media(max-width:768px){
+  .card{padding:14px}
+  button{font-size:16px}
+  input{font-size:16px}
+  .team{padding:10px}
+}
+
+@media(max-width:480px){
+  h1{font-size:22px}
+  h2{font-size:18px}
+  button{font-size:15px;padding:12px}
+  input{font-size:15px;padding:12px}
+  .team{flex-direction:column;gap:6px}
+}
+
+
+</style>
+</head>
+
+<body>
+
+<!-- MODE -->
+<div class="screen active" id="mode">
+<h1>SOMALİ</h1>
+<div class="card">
+<button onclick="selectMode('single')">Tekli</button>
+<button onclick="selectMode('team')">Eşli</button>
+</div>
+</div>
+
+<!-- NAMES -->
+<div class="screen" id="names">
+<div class="topbar"><h2>İsimler</h2><div class="money" id="moneyTop"></div></div>
+<div class="card" id="nameInputs"></div>
+<label><input type="checkbox" id="shuffle"> Takımları Karıştır</label>
+<button onclick="nextTarget()">Devam</button>
+</div>
+
+<!-- TARGET -->
+<div class="screen" id="target">
+<div class="topbar"><h2>Başlangıç</h2><div class="money" id="moneyTop2"></div></div>
+<div class="card">
+<input id="startScore" type="number" placeholder="Başlangıç Sayısı">
+<button onclick="nextMoney()">Devam</button>
+</div>
+</div>
+
+<!-- MONEY -->
+<div class="screen" id="moneyScreen">
+<h2>Bahis</h2>
+<div class="card">
+<input id="bet" type="number" placeholder="₺">
+<button onclick="startGame()">Oyuna Başla</button>
+</div>
+</div>
+
+<!-- GAME -->
+<div class="screen" id="game">
+<div class="topbar">
+<h2 id="roundText"></h2>
+<div class="money" id="moneyLabel"></div>
+</div>
+<div id="board"></div>
+<button onclick="openAction()">İşlem Yap</button>
+<button class="secondary" onclick="openStatus()">Güncel Durum</button>
+<button class="danger" onclick="location.reload()">Yeni Oyun</button>
+</div>
+
+<!-- ACTION -->
+<div class="screen" id="action">
+<h2>İşlem</h2>
+<div class="card">
+<button onclick="pickAction('D')">Düz</button>
+<button onclick="pickAction('O')">Okey</button>
+<button onclick="pickAction('G')">Gösterge</button>
+<button class="secondary" onclick="show('game')">Geri</button>
+</div>
+</div>
+
+<!-- PICK -->
+<div class="screen" id="pick">
+<h2>Kime?</h2>
+<div class="card" id="pickList"></div>
+<button class="secondary" onclick="show('game')">Geri</button>
+</div>
+
+<!-- END -->
+<div class="screen" id="end">
+<h2 id="winner"></h2>
+<div class="card" id="endList"></div>
+<button onclick="nextRound()">Oyuna Devam Et</button>
+<button class="danger" onclick="location.reload()">Yeni Oyun</button>
+</div>
+
+<!-- STATUS -->
+<div class="screen" id="status">
+<h2>Güncel Durum</h2>
+<div id="statusList"></div>
+<button class="secondary" onclick="show('game')">Geri</button>
+</div>
+
+<script>
+let mode='',players=[],bet=0,startScore=0,round=1,action='',history=[]
+const drop={D:2,O:4,G:1}
+const cap=s=>s.split(' ').map(w=>w[0].toUpperCase()+w.slice(1).toLowerCase()).join(' ')
+const show=id=>{document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active')}
+
+function selectMode(m){
+ mode=m
+ nameInputs.innerHTML=''
+ for(let i=0;i<(m==='single'?4:2);i++) nameInputs.innerHTML+='<input>'
+ show('names')
+}
+
+function nextTarget(){
+ players=[...nameInputs.querySelectorAll('input')].map(i=>({name:cap(i.value),score:0,okey:0,acts:[],balance:0}))
+ if(shuffle.checked) players.sort(()=>Math.random()-.5)
+ show('target')
+}
+
+function nextMoney(){
+ startScore=+document.getElementById('startScore').value
+ players.forEach(p=>p.score=startScore)
+ show('moneyScreen')
+}
+
+function startGame(){
+ bet=+document.getElementById('bet').value
+ updateMoney()
+ roundText.innerText=`${round}. Tur`
+ render()
+ show('game')
+}
+
+function updateMoney(){
+ document.querySelectorAll('.money').forEach(m=>m.innerText=`Sayısı ${bet}₺`)
+}
+
+function render(){
+ board.innerHTML=''
+ players.forEach(p=>{
+  board.innerHTML+=`
+  <div class="team">
+   <div>${p.name} <span class="tags">${p.acts.map(a=>`<span class="${a}">${a}</span>`).join('')}</span></div>
+   <div>${p.score}</div>
+  </div>`
+ })
+}
+
+function openAction(){show('action')}
+function pickAction(a){
+ action=a
+ pickList.innerHTML=''
+ players.forEach((p,i)=>pickList.innerHTML+=`<button onclick="apply(${i})">${p.name}</button>`)
+ show('pick')
+}
+
+function apply(i){
+ players[i].score=Math.max(0,players[i].score-drop[action])
+ players[i].acts.push(action)
+ if(action==='O') players[i].okey++
+ if((action==='D'||action==='O')&&players[i].score<=0) finish(i)
+ else{render();show('game')}
+}
+
+function finish(w){
+ let res=[]
+ if(mode==='team'){
+  const win=players[w], lose=players.find((_,i)=>i!==w)
+  const wNet=(lose.score*bet)+(win.okey*2*bet)-(lose.okey*2*bet)
+  const lNet=(lose.okey*2*bet)-(lose.score*bet)-(win.okey*2*bet)
+  win.balance+=wNet; lose.balance+=lNet
+  res.push({...win,net:wNet});res.push({...lose,net:lNet})
+ }else{
+  players.forEach((p,i)=>{
+   const enemyO=players.filter(x=>x!==p).reduce((a,b)=>a+b.okey,0)
+   const net=i===w
+    ? players.filter(x=>x!==p).reduce((a,b)=>a+b.score,0)*bet + (p.okey*3*2*bet) - (enemyO*2*bet)
+    : -(p.score*bet) + (p.okey*3*2*bet) - (enemyO*2*bet)
+   p.balance+=net
+   res.push({...p,net})
+  })
+ }
+ history.push({round,data:res})
+ drawEnd(w,res)
+}
+
+function drawEnd(w,res){
+ winner.innerText=`🏆 ${players[w].name}`
+ endList.innerHTML=''
+ res.forEach(r=>{
+  endList.innerHTML+=`
+  <div class="${r.net<0?'red':'green'}">
+   ${r.name} ${r.acts.map(a=>`<span class="${a}">${a}</span>`).join('')} | ${r.score} → ${r.net}₺
+  </div>`
+ })
+ show('end')
+}
+
+function openStatus(){
+ statusList.innerHTML=''
+ history.forEach(h=>{
+  statusList.innerHTML+=`<div class="card"><strong>${h.round}. Tur</strong>`
+  h.data.forEach(d=>{
+   statusList.innerHTML+=`
+   <div class="${d.net<0?'red':'green'} small">
+    ${d.name} ${d.acts.map(a=>`<span class="${a}">${a}</span>`).join('')} | ${d.score} → ${d.net}₺
+   </div>`
+  })
+  statusList.innerHTML+='</div>'
+ })
+ statusList.innerHTML+='<hr>'
+ players.forEach(p=>statusList.innerHTML+=`<div class="${p.balance<0?'red':'green'}">${p.name}: ${p.balance}₺</div>`)
+ show('status')
+}
+
+function nextRound(){
+ round++
+ players.forEach(p=>{p.score=startScore;p.okey=0;p.acts=[]})
+ roundText.innerText=`${round}. Tur`
+ render()
+ show('game')
+}
+</script>
+</body>
+</html>
+
+</template>
+<template id="dart_dart-mac.html">
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Karambol Kriket</title>
+
+<style>
+:root{
+  --bg:#0b1220;
+  --panel:#111827;
+  --line:#1f2937;
+--row1:#020617;
+--row2:#111c3a;
+  --text:#e5e7eb;
+  --accent:#22c55e;
+}
+
+*{box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif}
+body{margin:0;background:var(--bg);color:var(--text)}
+.app{max-width:900px;margin:auto;padding:10px}
+
+h1{text-align:center;margin:10px 0}
+
+.card{
+  background:var(--panel);
+  border-radius:14px;
+  padding:12px;
+  margin-bottom:12px;
+}
+
+button{
+  width:100%;
+  padding:14px;
+  font-size:18px;
+  border:none;
+  border-radius:12px;
+  background:var(--accent);
+  color:#000;
+  margin-top:10px;
+}
+
+.btn-row{display:flex;gap:10px}
+.btn-row button{flex:1}
+
+input{
+  width:100%;
+  padding:14px;
+  font-size:18px;
+  border-radius:12px;
+  border:none;
+  margin-bottom:10px;
+}
+
+.board{
+display:grid;
+border:2px solid #334155;
+border-radius:10px;
+overflow:hidden;
+height:calc(100vh - 260px);
+}
+.header,.row{display:grid}
+
+.row:nth-child(even){background:var(--row1)}
+.row:nth-child(odd){background:var(--row2)}
+
+.cell{
+  height:44px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-left:1px solid var(--line);
+  font-size:22px;
+  user-select:none;
+}
+.cell:first-child{border-left:none}
+
+.score{
+  font-weight:900;
+  font-size:24px;
+  background:rgba(0,0,0,.35);
+}
+
+.team-header{
+  flex-direction:column;
+  font-size:14px;
+}
+.team-header span{
+  font-size:20px;
+  font-weight:700;
+}
+
+.mark{
+  width:26px;height:26px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:50%;
+}
+.circle{border:2px solid var(--text)}
+
+.controls{display:flex;gap:10px;margin-top:10px}
+.controls button{background:#334155;color:#fff}
+
+.winner{
+  background:#16a34a!important;
+  color:#000;
+}
+
+.popup{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.8);
+  display:none;
+  align-items:flex-start;
+  justify-content:center;
+  padding-top:40px;
+  z-index:999;
+}
+
+.popup-card{
+  background:#0f172a;
+  padding:30px;
+  border-radius:20px;
+  text-align:center;
+  width:90%;
+  max-width:500px;
+  max-height:80vh;
+  overflow-y:auto;
+  box-shadow:0 0 30px rgba(34,197,94,.4);
+  animation:pop .25s ease;
+}
+
+.popup-card h2{
+  margin:0 0 10px;
+  font-size:26px;
+}
+
+.popup-card .cup{
+  font-size:60px;
+  margin:10px 0;
+}
+
+@keyframes pop{
+  from{transform:scale(.85);opacity:0}
+  to{transform:scale(1);opacity:1}
+}
+
+@media(max-width:768px){
+  .cell{font-size:18px;height:40px}
+  h1{font-size:22px}
+}
+
+@media(max-width:480px){
+  .cell{font-size:16px;height:36px}
+  input,button{font-size:16px}
+  .team-header span{font-size:16px}
+.score{
+  font-size:20px;
+}
+}
+
+.cell{
+  transition:transform .08s ease, background .2s ease;
+}
+
+.cell:active{
+  transform:scale(0.88);
+  background:#1e293b;
+}
+
+.cell.clicked{
+  animation:popMark .18s ease;
+}
+
+@keyframes popMark{
+  0%{transform:scale(.6);opacity:.4}
+  100%{transform:scale(1);opacity:1}
+}
+
+.undo-btn{
+  background:#dc2626 !important;
+  color:#fff;
+}
+
+.reset-btn{
+  background:#facc15 !important;
+  color:#000;
+}
+
+.info-btn{
+width:42px;
+height:42px;
+border-radius:50%;
+background:#06b6d4;
+color:white;
+font-weight:bold;
+font-size:18px;
+padding:0;
+}
+
+</style>
+</head>
+
+<body>
+<div class="app">
+<h1>KARAMBOL KRIKET</h1>
+
+<div id="modeSelect" class="card">
+<h3>Oyun Modu</h3>
+
+<div class="btn-row">
+<button onclick="selectMode('karambol')">Karambol Kriket</button>
+<button onclick="selectMode('kriket')">Kriket (15-20 B)</button>
+</div>
+
+</div>
+<div id="step1" class="card" style="display:none">
+  <h3>Takım Sayısı</h3>
+  <div class="btn-row">
+    <button onclick="selectTeams(2)">2</button>
+    <button onclick="selectTeams(3)">3</button>
+    <button onclick="selectTeams(4)">4</button>
+  </div>
+</div>
+
+<div id="step2" class="card" style="display:none">
+  <h3>Takım İsimleri</h3>
+  <div id="inputs"></div>
+
+  <h3>First To</h3>
+  <input id="firstToInput" type="number" placeholder="Örn: 3" min="1">
+
+  <button onclick="startGame()">Başla</button>
+</div>
+
+
+<div id="game" class="card" style="display:none">
+  <div id="board"></div>
+  <div class="controls">
+<button onclick="showInfo()" class="info-btn">i</button>
+    <button class="undo-btn" onclick="undo()">⬅ Undo</button>
+    <button class="reset-btn" onclick="confirmReset()">Reset</button>
+  </div>
+</div>
+</div>
+
+<div id="popup" class="popup" onclick="closePopup()">
+  <div class="popup-card" onclick="event.stopPropagation()">
+    <div id="popupContent"></div>
+  </div>
+</div>
+
+
+<script>
+
+let actions=[];
+
+let gameMode="karambol";
+
+let numbers=[];
+const states=["","/","X","⭕"];
+let teamCount=0,teams=[],scores=[],history=[],points=[],firstTo=1;
+
+function selectMode(mode){
+
+gameMode=mode;
+
+if(mode==="karambol"){
+numbers=["20","19","18","17","16","15","14","13","12","D","T","B","H"];
+}
+
+if(mode==="kriket"){
+numbers=["20","19","18","17","16","15","B"];
+}
+
+modeSelect.style.display="none";
+step1.style.display="block";
+
+}
+
+function selectTeams(n){
+  teamCount=n;
+  step1.style.display="none";
+  step2.style.display="block";
+  inputs.innerHTML="";
+  for(let i=0;i<n;i++)
+    inputs.innerHTML+=`<input placeholder="Takım ${i+1}">`;
+}
+
+function startGame(){
+ teams=[...inputs.querySelectorAll("input")].map(i=>{
+  return formatName(i.value || "Takım");
+});
+
+firstTo = parseInt(document.getElementById("firstToInput").value) || 1;
+  scores=Array.from({length:teamCount},()=>Array(numbers.length).fill(0));
+  points=Array(teamCount).fill(0);
+  step2.style.display="none";
+  game.style.display="block";
+  render();
+}
+
+function layout(){
+  if(teamCount===2) return [1,1];
+  if(teamCount===3) return [1,2];
+  return [2,2];
+}
+
+function render(){
+  board.innerHTML="";
+const rule=document.createElement("div");
+rule.style.textAlign="center";
+rule.style.marginBottom="6px";
+rule.innerHTML=`<strong>First To ${firstTo}</strong>`;
+board.appendChild(rule);
+
+  const [L,R]=layout();
+  board.style.gridTemplateColumns=`repeat(${L},1fr) 52px repeat(${R},1fr)`;
+
+
+
+  const header=document.createElement("div");
+  header.className="header";
+  header.style.gridTemplateColumns=board.style.gridTemplateColumns;
+
+  teams.forEach((t,i)=>{
+    const h=document.createElement("div");
+    h.className="cell team-header";
+    h.innerHTML=`${t}<span>${points[i]}</span>`;
+    header.appendChild(h);
+  });
+
+  const mid=document.createElement("div");
+  mid.className="cell score";
+  header.insertBefore(mid,header.children[L]);
+  board.appendChild(header);
+
+  numbers.forEach((num,row)=>{
+    const r=document.createElement("div");
+    r.className="row";
+    r.style.gridTemplateColumns=board.style.gridTemplateColumns;
+
+    teams.forEach((_,t)=>{
+      const c=document.createElement("div");
+      c.className="cell";
+      c.dataset.t=t;
+      c.dataset.r=row;
+      c.onclick=()=>toggle(c);
+      updateCell(c);
+      r.appendChild(c);
+    });
+
+    const s=document.createElement("div");
+    s.className="cell score";
+    s.textContent=num;
+    r.insertBefore(s,r.children[L]);
+    board.appendChild(r);
+  });
+}
+
+function toggle(cell){
+if(scores[cell.dataset.t][cell.dataset.r] === 3){
+return;
+}
+const team = teams[cell.dataset.t];
+const number = numbers[cell.dataset.r];
+const time = Date.now();
+  history.push({
+t:cell.dataset.t,
+r:cell.dataset.r,
+prev:scores[cell.dataset.t][cell.dataset.r]
+});
+  let val = scores[cell.dataset.t][cell.dataset.r];
+
+if(val < 3){
+  scores[cell.dataset.t][cell.dataset.r] = val + 1;
+}
+
+  cell.classList.add("clicked");
+  setTimeout(()=>cell.classList.remove("clicked"),180);
+
+  updateCell(cell);
+actions.unshift({
+team:cell.dataset.t,
+name:team,
+number:number,
+time:time,
+type:"write"
+});
+  checkWin();
+}
+
+
+function updateCell(cell){
+  const v=scores[cell.dataset.t][cell.dataset.r];
+  cell.innerHTML="";
+  if(states[v]==="⭕"){
+    const m=document.createElement("div");
+    m.className="mark circle";
+    m.textContent="X";
+    cell.appendChild(m);
+  }else cell.textContent=states[v];
+}
+
+function checkWin(){
+  scores.forEach((s,i)=>{
+    if(s.every(v=>v===3)){
+  points[i]++;
+
+ if(points[i] >= firstTo){
+showPopup(`
+  <div class="cup">🏆</div>
+  <h2>${teams[i]} MAÇI KAZANDI</h2>
+  <p>First To ${firstTo}</p>
+`, "match");
+
+  }else{
+showPopup(`
+  <h2>${teams[i]} SETİ KAZANDI</h2>
+`, "set");
+
+  }
+}
+
+  });
+}
+
+function undo(){
+
+const h = history.pop();
+if(!h) return;
+
+scores[h.t][h.r] = h.prev;
+
+actions.unshift({
+team:h.t,
+name:teams[h.t],
+number:numbers[h.r],
+time:Date.now(),
+type:"undo"
+});
+
+render();
+
+}
+
+function resetBoard(keepPoints=false){
+
+scores = Array.from({length:teamCount},()=>Array(numbers.length).fill(0));
+
+actions = []; // işlem geçmişi temizlenir
+
+if(!keepPoints) history=[];
+
+if(!keepPoints) points.fill(0);
+
+render();
+
+}
+
+
+function formatName(str){
+  return str
+    .toLowerCase()
+    .split(" ")
+    .map(w => w.charAt(0).toUpperCase() + w.slice(1))
+    .join(" ");
+}
+
+function showPopup(html, mode="set"){
+  popupContent.innerHTML = html;
+
+  // Maç bitmediyse buton ekleme
+  if(mode === "match"){
+    popupContent.innerHTML += `
+<div style="margin-top:15px;display:flex;gap:10px">
+<button onclick="rematch()">Rövanş ⚔️</button>
+<button onclick="restartGame()">Yeni Oyun</button>
+</div>
+`;
+  }
+
+  popup.style.display="flex";
+
+  // SET popup ise 2 saniye sonra otomatik kapan
+  if(mode === "set"){
+    setTimeout(()=>{
+      popup.style.display="none";
+      resetBoard(true);
+    },2000);
+  }
+}
+
+
+function closePopup(){
+  popup.style.display="none";
+}
+
+function restartGame(){
+  popup.style.display="none";
+
+  // Her şeyi sıfırla
+  teamCount=0;
+  teams=[];
+  scores=[];
+  history=[];
+  points=[];
+  firstTo=1;
+
+  game.style.display="none";
+  step2.style.display="none";
+  step1.style.display="block";
+}
+
+function rematch(){
+
+popup.style.display="none";
+
+scores = Array.from({length:teamCount},()=>Array(numbers.length).fill(0));
+history=[];
+points=Array(teamCount).fill(0);
+
+render();
+
+}
+
+function confirmReset(){
+  popupContent.innerHTML=`
+  <h2>Oyun sıfırlansın mı?</h2>
+  <div style="margin-top:20px;display:flex;gap:10px">
+    <button onclick="doReset()">Sıfırla</button>
+    <button onclick="closePopup()">Vazgeç</button>
+  </div>
+  `;
+  popup.style.display="flex";
+}
+
+function doReset(){
+  popup.style.display="none";
+  resetBoard();
+}
+
+function timeAgo(t){
+
+let diff = Math.floor((Date.now()-t)/1000);
+
+let m = Math.floor(diff/60);
+let s = diff%60;
+
+if(m>0) return `${m} dakika ${s} saniye önce`;
+return `${s} saniye önce`;
+
+}
+
+function showInfo(){
+
+let html=`
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+<h2 style="text-align:left">📜 İşlem Geçmişi</h2>
+<button onclick="closePopup()" style="
+background:#06b6d4;
+border:none;
+padding:6px 10px;
+border-radius:6px;
+color:white">✕</button>
+</div>
+`;
+
+actions.slice(0,50).forEach(a=>{
+
+let color = a.team==0 ? "#ef4444" : "#22c55e";
+
+let text = a.type=="undo"
+? `${a.name} ${a.number} geri alındı`
+: `${a.name} ${a.number} yazıldı`;
+
+html+=`
+<div style="display:flex;justify-content:space-between;
+border-bottom:1px solid #334155;padding:6px">
+
+<span style="color:${color}">${text}</span>
+
+<span style="opacity:.6">${timeAgo(a.time)}</span>
+
+</div>
+`;
+
+});
+
+popupContent.innerHTML = html;
+popup.style.display="flex";
+
+}
+
+</script>
+</body>
+</html>
+
+
+</template>
+<template id="dart_dart-turnuva.html">
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Karambol Kriket Turnuva</title>
+
+<style>
+:root{
+--bg:#0b1220;--panel:#111827;--line:#1f2937;
+--row1:#020617;
+--row2:#111c3a;
+--text:#e5e7eb;--accent:#22c55e;
+}
+*{box-sizing:border-box;font-family:-apple-system}
+body{margin:0;background:var(--bg);color:var(--text)}
+.app{max-width:900px;margin:auto;padding:10px}
+h1{text-align:center}
+.card{background:var(--panel);border-radius:14px;padding:12px;margin-bottom:12px}
+button{width:100%;padding:14px;font-size:18px;border:none;border-radius:12px;background:var(--accent);color:#000;margin-top:10px;cursor:pointer}
+.btn-row{display:flex;gap:10px;flex-wrap:wrap}
+.btn-row button{flex:1}
+/* === iOS INPUT GERÇEKTEN BÜYÜK OLSUN === */
+input[type="text"],
+input[type="number"] {
+  font-size: 22px !important;
+  line-height: 1.4;
+}
+
+/* iPhone Safari özel fix */
+@supports (-webkit-touch-callout: none) {
+  input[type="text"],
+  input[type="number"] {
+    font-size: 22px !important;
+  }
+}
+
+input{width:100%;padding:14px;font-size:18px;border-radius:12px;border:none}
+label{display:flex;gap:8px;align-items:center;margin:6px 0}
+.hidden{display:none!important;pointer-events:none!important}
+
+/* INFO BAR */
+.info-bar{
+display:flex;justify-content:space-between;align-items:center;
+background:#020617;padding:8px 12px;border-radius:10px;font-size:14px
+}
+
+/* SCOREBOARD */
+.board{display:grid}
+.header,.row{display:grid}
+.row:nth-child(even){background:var(--row1)}
+.row:nth-child(odd){background:var(--row2)}
+.cell{
+height:44px;display:flex;align-items:center;justify-content:center;
+border-left:1px solid var(--line);font-size:22px;
+user-select:none;cursor:pointer
+}
+.cell:first-child{border-left:none}
+.score{font-weight:700}
+.team-header{flex-direction:column;font-size:14px}
+.team-score{font-size:18px;font-weight:700}
+.mark{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.circle{border:2px solid #fff}
+
+/* OVERLAY */
+.overlay{
+position:fixed;inset:0;background:rgba(0,0,0,.8);
+display:flex;align-items:center;justify-content:center;z-index:50
+}
+.overlay .box{
+background:#020617;padding:22px 28px;border-radius:16px;text-align:center
+}
+.overlay span{font-size:56px}
+
+/* BRACKET */
+.bracket{margin-top:10px}
+.match{
+background:#020a1f;border:1px solid var(--line);
+border-radius:10px;padding:8px;margin-bottom:6px
+}
+.vs{text-align:center;color:#94a3b8;font-size:12px;margin:4px 0}
+
+/* WINNER */
+.winner{text-align:center;font-size:28px}
+.winner span{font-size:60px;display:block;margin:10px 0}
+
+/* === SERİBAŞI + INPUT ÇAKIŞMA FIX (MOBİL) === */
+label {
+  align-items: center;
+}
+
+label input[type="text"] {
+  flex: 1;                 /* 🔑 EN KRİTİK SATIR */
+  min-width: 0;
+}
+
+/* INPUT GERÇEK BOYUT VE OKUNAKLILIK */
+input[type="text"] {
+  font-size: 22px !important;
+  padding: 16px 18px;
+  background-color: #ffffff;
+  color: #000000;
+  caret-color: #000000;
+  -webkit-text-fill-color: #000000;
+}
+
+/* CHECKBOX MOBİLDE INPUT'U EZMESİN */
+label input[type="checkbox"] {
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  margin-left: 12px;
+}
+
+.overlay .box{
+  box-shadow:0 0 30px rgba(34,197,94,.4);
+  animation:pop .25s ease;
+}
+
+.cell{
+  transition:transform .08s ease, background .2s ease;
+}
+
+.cell:active{
+  transform:scale(0.88);
+  background:#1e293b;
+}
+
+@media(max-width:768px){
+  .cell{font-size:18px;height:40px}
+}
+
+@media(max-width:480px){
+  .cell{font-size:16px;height:36px}
+  input,button{font-size:16px}
+}
+
+
+</style>
+</head>
+
+<body>
+<div class="app">
+<h1>KARAMBOL KRIKET</h1>
+
+<!-- SETUP -->
+<div id="setup" class="card">
+  <div id="s1">
+    <p>Takım Sayısı</p>
+    <div class="btn-row">
+      <button onclick="setTeamCount(2)">2</button>
+      <button onclick="setTeamCount(3)">3</button>
+      <button onclick="setTeamCount(4)">4</button>
+      <button onclick="setTeamCount(5)">5</button>
+      <button onclick="setTeamCount(6)">6</button>
+      <button onclick="setTeamCount(7)">7</button>
+      <button onclick="setTeamCount(8)">8</button>
+    </div>
+  </div>
+
+  <div id="s2" class="hidden">
+    <p>Oyuncu Sayısı</p>
+    <input id="playerCount" type="number" min="2">
+    <button onclick="setPlayers()">Devam</button>
+  </div>
+
+  <div id="s3" class="hidden">
+    <p>Oyuncular</p>
+    <div id="playerInputs"></div>
+    <button onclick="createTeams()">Takımları Oluştur</button>
+  </div>
+
+  <div id="s4" class="hidden">
+    <p>Turnuva Ayarları</p>
+    <label><input type="radio" name="mode" value="1" checked> Best of 1</label>
+    <label><input type="radio" name="mode" value="3"> Best of 3</label>
+    <div id="teamList"></div>
+    <div class="btn-row">
+      <button onclick="reshuffle()">Tekrar Kura</button>
+      <button onclick="prepareStart()">Turnuvayı Başlat</button>
+    </div>
+  </div>
+</div>
+
+<!-- INFO -->
+<div id="info" class="card hidden">
+  <div class="info-bar">
+    <div>
+      <strong id="matchLabel"></strong><br>
+      <span id="roundLabel"></span>
+    </div>
+    <button onclick="toggleBracket()" style="font-size:12px">Turnuva Ağacı</button>
+  </div>
+  <div id="bracketWrap" class="hidden">
+    <button onclick="toggleBracket()" style="font-size:12px">Kapat</button>
+    <div id="bracket" class="bracket"></div>
+  </div>
+</div>
+
+<!-- GAME -->
+<div id="game" class="card hidden">
+  <div id="board"></div>
+</div>
+
+<!-- OVERLAY -->
+<div id="overlay" class="overlay hidden">
+  <div class="box">
+    <h2>Maçı Kazandı</h2>
+    <div id="overlayText"></div>
+    <span id="overlayCount"></span>
+  </div>
+</div>
+
+<!-- WINNER -->
+<div id="winner" class="card hidden">
+  <div class="winner">
+    <span>🏆</span>
+    <div><strong>ŞAMPİYON</strong></div>
+    <div id="winnerName"></div>
+    <div class="btn-row">
+      <button onclick="restartSameTeams()">Tekrar Turnuva</button>
+      <button onclick="location.reload()">Yeni Turnuva</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const shuffle=a=>a.sort(()=>Math.random()-.5);
+function cap(str){
+  return str
+    .toLowerCase()
+    .split(" ")
+    .map(w => w.charAt(0).toUpperCase() + w.slice(1))
+    .join(" ");
+}
+
+let teamCount, teams=[], queue=[], baseTeams=[];
+let currentMatch=[], mode=1, matchWins=[0,0];
+
+function setTeamCount(n){teamCount=n;s1.classList.add("hidden");s2.classList.remove("hidden");}
+
+function setPlayers(){
+  playerInputs.innerHTML="";
+  for(let i=0;i<playerCount.value;i++){
+    playerInputs.innerHTML+=`
+      <label>
+        <input type="text" placeholder="Oyuncu ${i+1}">
+        <input type="checkbox"> Seribaşı
+      </label>`;
+  }
+  s2.classList.add("hidden");s3.classList.remove("hidden");
+}
+
+function createTeams(){
+  let rows=[...playerInputs.children];
+  let seeded=[],normal=[];
+  rows.forEach(r=>{
+    let name=cap(r.children[0].value.trim());
+    let seed=r.children[1].checked;
+    (seed?seeded:normal).push(name);
+  });
+  shuffle(seeded);shuffle(normal);
+  teams=[...Array(teamCount)].map(()=>[]);
+  seeded.forEach((p,i)=>teams[i%teamCount].push(p));
+  normal.forEach((p,i)=>teams[i%teamCount].push(p));
+  teams=teams.map(t=>({name:t.join(" & ")}));
+  baseTeams=JSON.parse(JSON.stringify(teams));
+  teamList.innerHTML=teams.map(t=>`<p>• ${t.name}</p>`).join("");
+  s3.classList.add("hidden");s4.classList.remove("hidden");
+}
+
+function reshuffle(){createTeams();}
+
+function prepareStart(){
+  mode=+document.querySelector('input[name="mode"]:checked').value;
+  shuffle(teams);
+  queue=[...teams];
+  setup.classList.add("hidden");
+  info.classList.remove("hidden");
+  startNextMatch();
+}
+
+function restartSameTeams(){
+  winner.classList.add("hidden");
+  teams=JSON.parse(JSON.stringify(baseTeams));
+  shuffle(teams);
+  queue=[...teams];
+  info.classList.remove("hidden");
+  startNextMatch();
+}
+
+function roundName(){
+  if(queue.length<=2) return "Final";
+  if(queue.length<=4) return "Yarı Final";
+  return "Eleme Turu";
+}
+
+function toggleBracket(){
+  bracketWrap.classList.toggle("hidden");
+  renderBracket();
+}
+
+function renderBracket(){
+  bracket.innerHTML="";
+  for(let i=0;i<queue.length;i+=2){
+    if(!queue[i+1]) break;
+    bracket.innerHTML+=`
+      <div class="match">
+        ${queue[i].name}
+        <div class="vs">VS</div>
+        ${queue[i+1].name}
+      </div>`;
+  }
+}
+
+const nums=["20","19","18","17","16","15","14","13","12","D","T","B","H"];
+let scores;
+
+function startNextMatch(){
+  if(queue.length===1){
+    winnerName.textContent=queue[0].name;
+    winner.classList.remove("hidden");
+    info.classList.add("hidden");
+    return;
+  }
+  currentMatch=[queue.shift(),queue.shift()];
+  matchWins=[0,0];
+  matchLabel.textContent=currentMatch[0].name+" vs "+currentMatch[1].name;
+  roundLabel.textContent=roundName();
+  startBoard();
+}
+
+function startBoard(){
+  game.classList.remove("hidden");
+  render();
+}
+
+function render(){
+  board.innerHTML="";
+  scores=[Array(nums.length).fill(0),Array(nums.length).fill(0)];
+  board.style.gridTemplateColumns="1fr 52px 1fr";
+
+  const h=document.createElement("div");
+  h.className="header";
+  h.style.gridTemplateColumns=board.style.gridTemplateColumns;
+
+  currentMatch.forEach((t,i)=>{
+    const c=document.createElement("div");
+    c.className="cell team-header";
+    c.innerHTML=t.name+(mode===3?`<div class="team-score">${matchWins[i]}</div>`:"");
+    h.appendChild(c);
+  });
+
+  h.insertBefore(document.createElement("div"),h.children[1]);
+  board.appendChild(h);
+
+  nums.forEach((n,r)=>{
+    const row=document.createElement("div");
+    row.className="row";
+    row.style.gridTemplateColumns=board.style.gridTemplateColumns;
+    for(let t=0;t<2;t++){
+      const c=document.createElement("div");
+      c.className="cell";
+      c.onmousedown=e=>e.preventDefault();
+      c.onclick=()=>tap(c,t,r);
+      row.appendChild(c);
+      if(t===0){
+        const s=document.createElement("div");
+        s.className="cell score";
+        s.textContent=n;
+        row.appendChild(s);
+      }
+    }
+    board.appendChild(row);
+  });
+}
+
+function tap(cell,t,r){
+  scores[t][r]=(scores[t][r]+1)%4;
+  cell.innerHTML=["","/","X","<div class='mark circle'>X</div>"][scores[t][r]];
+  checkWin();
+}
+
+function checkWin(){
+  scores.forEach((s,i)=>{
+    if(s.every(v=>v===3)){
+      matchWins[i]++;
+      if(mode===1 || matchWins[i]===2){
+        let win=currentMatch[i];
+        game.classList.add("hidden");
+        if(queue.length===0){
+          winnerName.textContent=win.name;
+          winner.classList.remove("hidden");
+        }else{
+          queue.push(win);
+          showWinOverlay(win.name);
+        }
+      }else{
+        render();
+      }
+    }
+  });
+}
+
+function showWinOverlay(name){
+overlayText.innerHTML=`
+  <div style="font-size:60px">🏆</div>
+  <h2>${name} MAÇI KAZANDI</h2>
+`;
+  overlay.classList.remove("hidden");
+  let c=3;overlayCount.textContent=c;
+  let t=setInterval(()=>{
+    c--;overlayCount.textContent=c;
+    if(c===0){
+      clearInterval(t);
+      overlay.classList.add("hidden");
+      startNextMatch();
+    }
+  },1000);
+}
+</script>
+</body>
+</html>
+
+</template>
+<template id="dart_dartbot-v1.html">
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Karambol Kriket w/ DartBot</title>
+
+<style>
+body{margin:0;background:#0b1220;color:#e5e7eb;font-family:system-ui}
+.app{max-width:900px;margin:auto;padding:12px;position:relative}
+h1{text-align:center}
+.top-right{position:absolute;top:10px;right:16px;font-size:14px;opacity:.9}
+.card{background:#111827;border-radius:16px;padding:14px;margin-bottom:12px}
+button{width:100%;padding:14px;font-size:18px;border:none;border-radius:14px;background:#22c55e;color:#000;margin-top:10px}
+button.gray{background:#374151;color:#fff}
+select{width:100%;padding:12px;font-size:18px;border-radius:12px;margin-top:10px}
+.screen{display:none}
+.active{display:block}
+.board{border-top:2px solid #374151;margin-top:10px}
+.row{display:grid;grid-template-columns:1fr 60px 1fr;border-bottom:1px solid #374151}
+.cell{height:46px;display:flex;align-items:center;justify-content:center;font-size:22px}
+.mid{font-weight:700}
+.popup{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;align-items:center;justify-content:center}
+.popup-inner{background:#111827;padding:22px;border-radius:18px;width:90%;max-width:380px;text-align:center}
+.throw{margin:6px 0;font-size:18px}
+.win{font-size:34px;color:#22c55e}
+.lose{font-size:34px;color:#ef4444}
+@keyframes pulse {
+  0%{transform:scale(1)}
+  50%{transform:scale(1.08)}
+  100%{transform:scale(1)}
+}
+#coin .popup-inner{
+  animation:pulse 1.2s infinite;
+}
+
+.status{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:10px;
+}
+.stat{
+  flex:1;
+  text-align:center;
+  padding:10px;
+  opacity:.4;
+  font-weight:700;
+}
+.stat.active{
+  opacity:1;
+  border-bottom:3px solid #22c55e;
+}
+
+.popup{
+  backdrop-filter: blur(6px);
+}
+
+.fab{
+  position:fixed;
+  right:18px;
+  bottom:18px;
+  width:60px;
+  height:60px;
+  border-radius:50%;
+  background:#22c55e;
+  font-size:28px;
+  border:none;
+  box-shadow:0 10px 25px rgba(0,0,0,.4);
+}
+.fab:active{
+  transform:scale(.92);
+}
+
+@media(max-width:768px){
+  h1{font-size:22px}
+  .cell{font-size:18px;height:40px}
+  button{font-size:16px}
+}
+
+@media(max-width:480px){
+  .cell{font-size:16px;height:36px}
+  .fab{width:52px;height:52px;font-size:24px}
+}
+
+
+
+</style>
+</head>
+
+<body>
+<div class="app">
+<h1>🎯 Karambol Kriket w/ DartBot</h1>
+<div id="levelInfo" class="top-right"></div>
+
+<div id="start" class="card screen active">
+<h2>Maç Türü</h2>
+<button onclick="startGame()">Oyuna Başla</button>
+
+<h2>Dart Bot Seviyesi</h2>
+<select id="botLevel">
+  <option value="1">Level 1</option><option value="2">Level 2</option>
+  <option value="3">Level 3</option><option value="4">Level 4</option>
+  <option value="5">Level 5</option><option value="6">Level 6</option>
+  <option value="7">Level 7</option><option value="8">Level 8</option>
+  <option value="9">Level 9</option><option value="10">Level 10</option><option value="11">İnsanüstü</option>
+
+</select>
+</div>
+
+<div id="coin" class="popup">
+  <div class="popup-inner">
+    <div id="coinText" style="font-size:26px;font-weight:700">
+      🎲 Başlangıç Kurası
+    </div>
+    <div id="coinSub" style="margin-top:10px;opacity:.7">
+      Atan belirleniyor...
+    </div>
+  </div>
+</div>
+
+<div id="game" class="card screen">
+<div class="status">
+  <div id="pStat" class="stat active">👤 SEN</div>
+  <div id="bStat" class="stat">🤖 BOT</div>
+</div>
+
+<button class="fab" onclick="endPlayer()">➤</button>
+
+<div id="board" class="board"></div>
+<button class="gray" onclick="undo()">UNDO (Bu El)</button>
+<button class="gray" onclick="restart()">🔄 Oyunu Baştan Başlat</button>
+</div>
+</div>
+
+<div id="popup" class="popup">
+  <div class="popup-inner" id="popupContent"></div>
+</div>
+
+<script>
+const targets=["20","19","18","17","16","15","14","13","12","D","T","B","H"];
+const marks=["","/","X","⭕"];
+const ring=[20,1,18,4,13,6,10,15,2,17,3,19,7,16,8,11,14,9,12,5];
+
+let scores,turn="player",snapshot,botLevel=5,matchScore=[0,0],bestOf=1;
+let throwCount = 0;
+let botMemory = null;
+
+/* === GAME START === */
+function startGame(){
+  botLevel = parseInt(document.getElementById("botLevel").value);
+  document.getElementById("levelInfo").textContent = `🤖 Dart Bot Level: ${botLevel}`;
+
+  scores = [Array(13).fill(0), Array(13).fill(0)];
+  snapshot = JSON.parse(JSON.stringify(scores));
+
+  document.getElementById("coin").style.display = "flex";
+  document.getElementById("coinText").textContent = "🎲 Başlangıç Kurası";
+  document.getElementById("coinSub").textContent = "Atan belirleniyor...";
+
+  setTimeout(() => {
+    turn = Math.random() < 0.5 ? "player" : "bot";
+    document.getElementById("coinText").textContent =
+      turn === "player" ? "🎯 SEN BAŞLIYORSUN" : "🤖 DART BOT BAŞLIYOR";
+    document.getElementById("coinSub").textContent = "Hazırlan...";
+  }, 1200);
+
+  setTimeout(() => {
+    document.getElementById("coin").style.display = "none";
+    show("game");
+    render();
+    updateTurn();
+    if (turn === "bot") botTurn();
+  }, 2000);
+}
+
+
+function restart(){ show("start"); }
+
+function show(id){
+  document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+}
+
+/* === RENDER BOARD === */
+function render(){
+  board.innerHTML="";
+  targets.forEach((t,i)=>{
+    let r=document.createElement("div");r.className="row";
+    let l=document.createElement("div");l.className="cell";
+    l.textContent=marks[scores[0][i]];
+    l.onclick=()=>{
+      if(turn!=="player")return;
+      snapshot=JSON.parse(JSON.stringify(scores));
+      scores[0][i]=Math.min(3,scores[0][i]+1);
+      render();checkWin();
+    };
+    let m=document.createElement("div");m.className="cell mid";m.textContent=t;
+    let rt=document.createElement("div");rt.className="cell";
+    rt.textContent=marks[scores[1][i]];
+    r.append(l,m,rt);board.appendChild(r);
+  });
+}
+
+function updateTurn(){
+  document.getElementById("pStat").classList.toggle("active",turn==="player");
+  document.getElementById("bStat").classList.toggle("active",turn==="bot");
+}
+
+/* === UNDO ACTION === */
+function undo(){
+  if(turn!=="player")return;
+  scores=JSON.parse(JSON.stringify(snapshot));
+  render();
+}
+
+/* === PLAYER END === */
+function endPlayer(){
+  snapshot=JSON.parse(JSON.stringify(scores));
+  turn="bot";
+  updateTurn();
+  botTurn();
+}
+
+/* === BOT AI === */
+function levelAcc(){
+  const table={
+    1:{hit:30, n1:28, n2:23, rnd:18, bull:1},
+    2:{hit:35, n1:29, n2:20, rnd:15, bull:1},
+    3:{hit:40, n1:30, n2:18, rnd:11, bull:1},
+    4:{hit:45, n1:32, n2:15, rnd:7,  bull:1},
+    5:{hit:50, n1:30, n2:14, rnd:5,  bull:1},
+    6:{hit:55, n1:27, n2:12, rnd:5,  bull:1},
+    7:{hit:55, n1:28, n2:12, rnd:4,  bull:1},
+    8:{hit:60, n1:26, n2:10, rnd:3,  bull:1},
+    9:{hit:65, n1:24, n2:8,  rnd:2,  bull:1},
+    10:{hit:70,n1:22, n2:6,  rnd:1,  bull:1},
+    11:{hit:83,n1:12, n2:3,  rnd:1,  bull:1} // İnsanüstü
+  };
+  return table[botLevel];
+}
+
+function endgameTarget(){
+  // 20–12 hepsi kapalı mı?
+  let numbersClosed = true;
+  for(let i=0;i<=8;i++){
+    if(scores[1][i] < 3) numbersClosed = false;
+  }
+  if(!numbersClosed) return null;
+
+  let D = scores[1][9] < 3;
+  let T = scores[1][10] < 3;
+  let B = scores[1][11] < 3;
+  let H = scores[1][12] < 3;
+
+  // 1️⃣ House açık → 20
+  if(H) return 20;
+
+  // 2️⃣ House kapalı, Triple açık → 20
+  if(!H && T) return 20;
+
+  // 3️⃣ Triple kapalı, Double açık → 16
+  if(!H && !T && D) return 16;
+
+  // 4️⃣ Sadece Bull / House kaldıysa
+  if(!D && !T && (B || H)) return "B";
+
+  return null;
+}
+
+
+
+function nextTarget(){
+  for(let i=0;i<=8;i++) if(scores[1][i]<3) return parseInt(targets[i]);
+  if(scores[1][10]<3) return "T";
+  if(scores[1][9]<3) return "D";
+  if(scores[1][12]<3) return "H";
+  if(scores[1][11]<3) return "B";
+  return null;
+}
+
+function fallbackTarget(){
+  // 1️⃣ X olan sayı
+  for(let i=0;i<=8;i++) if(scores[1][i]===2) return parseInt(targets[i]);
+  // 2️⃣ / olan sayı
+  for(let i=0;i<=8;i++) if(scores[1][i]===1) return parseInt(targets[i]);
+  // 3️⃣ ana hedef
+  return nextTarget();
+}
+
+function botTurn(){
+throwCount = 0; // HER BOT ELİ BAŞINDA
+botMemory = {
+  firstHit: null,      // 1. okun gittiği yer
+  houseTry: scores[1][12] < 3  // House açık mı?
+};
+  popup.style.display="flex";
+  popupContent.innerHTML="<h3>Dart Bot Atıyor</h3>";
+  let throws=[],i=0;
+  let iv=setInterval(()=>{
+    let t=botThrow();
+    throws.push(t);
+throwCount++;
+    popupContent.innerHTML+=`<div class="throw">${i+1}. Ok: ${t.text}</div>`;
+    i++;
+    if(i===3){ clearInterval(iv); setTimeout(()=>botWrite(throws),800); }
+  },900);
+}
+
+function botThrow(){
+
+  let target = nextTarget();
+let eg = endgameTarget();
+if(eg !== null && !botMemory.houseTry){
+  target = eg;
+}
+
+
+if(target === "H"){
+  target = "B"; // House hedeflenmez, bull üzerinden oynanır
+}
+
+if(!botMemory.houseTry && endgameTarget() === null){
+  target = fallbackTarget();
+}
+
+// HOUSE açıksa ve 1. ok atıldıysa
+if(botMemory.houseTry && botMemory.firstHit !== null && scores[1][12] < 3){
+  target = botMemory.firstHit;
+}
+
+
+
+  const acc = levelAcc(); // {hit,n1,n2,rnd,bull}
+let roll = Math.random() * 100;
+let landed;
+
+// 🎯 HEDEFİ TUTTU MU?
+if (roll <= acc.hit) {
+  landed = target;
+} else {
+  roll -= acc.hit;
+
+  // ↔️ ±1 KOMŞU
+  if (roll <= acc.n1) {
+    let idx = ring.indexOf(target);
+if(idx === -1){
+  landed = target; // sayı değilse komşu hesabı yapma
+}else{
+  let dir = Math.random() < 0.5 ? -1 : 1;
+  landed = ring[(idx + dir + 20) % 20];
+}
+
+  }
+  // ↔️ ±2 KOMŞU
+  else if (roll <= acc.n1 + acc.n2) {
+    let idx = ring.indexOf(target);
+if(idx === -1){
+  landed = target;
+}else{
+  let dir = Math.random() < 0.5 ? -2 : 2;
+  landed = ring[(idx + dir + 20) % 20];
+}
+
+  }
+  // 🎯 BULL
+  else if (roll <= acc.n1 + acc.n2 + acc.bull) {
+    landed = "B";
+  }
+  // ❓ SAÇMA AMA MÜMKÜN
+  else {
+    landed = ring[Math.floor(Math.random() * ring.length)];
+  }
+}
+
+// 🧠 HOUSE HAFIZA GÜNCELLEME
+if(botMemory.houseTry){
+  if(botMemory.firstHit === null){
+    botMemory.firstHit = landed;
+  }else if(landed !== botMemory.firstHit){
+    botMemory.houseTry = false;
+  }
+}
+
+ if(landed === "B"){
+  const bullTable = {
+    1:{b:6, rb:1},
+    2:{b:7, rb:1},
+    3:{b:8, rb:1},
+    4:{b:10, rb:2},
+    5:{b:12, rb:3},
+    6:{b:20, rb:5},
+    7:{b:25, rb:7},
+    8:{b:30, rb:10},
+    9:{b:35, rb:12},
+    10:{b:40, rb:15},
+    11:{b:55, rb:25} // İnsanüstü
+  };
+
+  let r = Math.random() * 100;
+
+
+  let rates = bullTable[botLevel];
+
+  if(r < rates.rb){
+    return {num:"B", bull:2, text:"Redbull"};
+  }
+  if(r < rates.rb + rates.b){
+    return {num:"B", bull:1, text:"Bull"};
+  }
+
+  // kaçtı → single
+  let n = ring[Math.floor(Math.random() * ring.length)];
+  return {num:n, mult:1, text:`${n} Single`};
+}
+
+
+const sdTable={
+  1:{s:92,t:6,d:2},
+  2:{s:90,t:8,d:2},
+  3:{s:88,t:9,d:3},
+  4:{s:86,t:10,d:4},
+  5:{s:84,t:11,d:5},
+  6:{s:82,t:12,d:6},
+  7:{s:80,t:13,d:7},
+  8:{s:78,t:14,d:8},
+  9:{s:76,t:15,d:9},
+  10:{s:74,t:17,d:9},
+  11:{s:60,t:25,d:15} // İnsanüstü
+};
+
+const boostTable = {
+  1:1.2, 2:1.2, 3:1.2,
+  4:1.5, 5:1.5, 6:1.5,
+  7:1.8, 8:1.8,
+  9:2.0, 10:2.0,
+  11:2.5 // İnsanüstü
+};
+
+
+
+  let r=Math.random()*100;
+let rates=sdTable[botLevel];
+let boostedRates = {...rates};
+
+// 🎯 SON OK PSİKOLOJİSİ
+if(botMemory.firstHit !== null && throwCount === 3){
+  boostedRates.s = Math.min(boostedRates.s + (botLevel), 100);
+  boostedRates.t = Math.max(boostedRates.t - (botLevel/2), 0);
+  boostedRates.d = Math.max(boostedRates.d - (botLevel/2), 0);
+}
+
+// 🎯 ÖZEL HEDEF BOOST (T için 20, D için 16)
+
+// Triple için 20 deniyorsa
+if(target === 20 && scores[1][10] < 3){
+  boostedRates.t = Math.min(boostedRates.t * boostTable[botLevel], 100);
+  boostedRates.s = Math.max(
+    boostedRates.s - (boostedRates.t - rates.t),
+    0
+  );
+}
+
+// Double için 16 deniyorsa
+if(target === 16 && scores[1][9] < 3 && scores[1][10] >= 3){
+  boostedRates.d = Math.min(boostedRates.d * boostTable[botLevel], 100);
+  boostedRates.s = Math.max(
+    boostedRates.s - (boostedRates.d - rates.d),
+    0
+  );
+}
+
+let mult=1;
+
+if(r > boostedRates.s && r <= boostedRates.s + boostedRates.t){
+  mult = 3;
+}
+else if(r > boostedRates.s + boostedRates.t){
+  mult = 2;
+}
+
+
+
+  return {num:landed,mult,text:`${landed} ${["Single","Double","Triple"][mult-1]}`};
+}
+
+/* === BOT WRITE TO SCOREBOARD === */
+function botWrite(throws){
+  let nums=throws.map(t=>t.num);
+  let same=nums.every(n=>n===nums[0]);
+  let D=9,T=10,B=11,H=12;
+
+  if(same && scores[1][H]<3){
+    scores[1][H]++;
+    popupContent.innerHTML+="<div class='throw'>HOUSE</div>";
+  }else{
+    throws.forEach(t=>{
+// 🧠 SAYI KAPANDIYSA VE HOUSE KAPALIYSA
+if(scores[1][12] >= 3){ // house kapalı
+  let idx = targets.indexOf(String(t.num));
+  if(idx !== -1 && scores[1][idx] === 2){
+    // Bu ok sayıyı kapatıyor → sonraki oklar boşa gitmesin
+    botMemory.houseTry = false;
+  }
+}
+
+      if(t.num==="B"){
+        scores[1][B]=Math.min(3,scores[1][B]+t.bull);return;
+      }
+      let idx=targets.indexOf(String(t.num));
+      if(t.mult===3){
+        if(scores[1][T]<3) scores[1][T]++;
+        else scores[1][idx]=3;
+        return;
+      }
+      if(t.mult===2){
+        if(scores[1][D]<3) scores[1][D]++;
+        else scores[1][idx]=Math.min(3,scores[1][idx]+2);
+        return;
+      }
+      scores[1][idx]=Math.min(3,scores[1][idx]+1);
+    });
+  }
+
+  popup.style.display="none";
+  turn="player"; updateTurn(); render(); checkWin();
+}
+
+/* === CHECK WIN === */
+function checkWin(){
+  let p=scores[0].every(v=>v>=3);
+  let b=scores[1].every(v=>v>=3);
+  if(!p&&!b)return;
+  popup.style.display="flex";
+  popupContent.innerHTML = p
+ ? "<div class='win'>🏆 KAZANDIN</div><div>Yeni maç başlıyor...</div>"
+ : "<div class='lose'>😈 KAYBETTİN</div><div>Bir daha dene...</div>";
+
+
+  setTimeout(()=>{
+    popup.style.display="none";
+    show("start");
+  },2000);
+}
+</script>
+</body>
+</html>
+
+</template>
+
+
+<script>
+function loadPage(name){
+  var t = document.getElementById(name);
+  if(t){
+    document.getElementById("app").innerHTML = t.innerHTML;
+  }
+}
+</script>
+</body>
+</html>
